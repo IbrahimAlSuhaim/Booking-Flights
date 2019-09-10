@@ -1,3 +1,6 @@
+<?php
+  include './preventLoggedUsers.php';
+ ?>
 <!--
 
 =========================================================
@@ -33,7 +36,9 @@
 </head>
 
 <body>
-  <?php include 'header.php' ?>
+  <?php
+  include './header.php';
+  ?>
   <main>
     <section class="section section-shaped section-lg">
       <div class="shape shape-style-1 bg-gradient-default">
@@ -55,27 +60,29 @@
                   <small>Sign in</small>
                 </div>
                 <?php
-                if(isset($_GET['error'])) {
+                if(isset($_SESSION['error'])) {
                   echo '
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                       <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
-                      <span class="alert-inner--text">'.$_GET['error'].'</span>
+                      <span class="alert-inner--text">'.$_SESSION['error'].'</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
                   ';
+                  unset($_SESSION['error']);
                 }
-                if(isset($_GET['message'])){
+                if(isset($_SESSION['message'])){
                   echo '
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                       <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                      <span class="alert-inner--text"><strong>Success! </strong>'.$_GET['message'].'</span>
+                      <span class="alert-inner--text"><strong>Success! </strong>'.$_SESSION['message'].'</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
                   ';
+                  unset($_SESSION['message']);
                 }
                  ?>
                 <form action="./checkSignIn.php" method="post">
@@ -96,7 +103,7 @@
                     </div>
                   </div>
                   <div class="custom-control custom-control-alternative custom-checkbox">
-                    <input class="custom-control-input" id="customCheckLogin" type="checkbox">
+                    <input class="custom-control-input" id="customCheckLogin" type="checkbox" name="remember">
                     <label class="custom-control-label" for="customCheckLogin">
                       <span>Remember me</span>
                     </label>
