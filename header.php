@@ -46,7 +46,7 @@
             if(isset($_COOKIE['email'])) {
               echo '
               <li class="nav-item">
-                <span class="text-white d-none d-lg-block">Welcome '.$_COOKIE['email'].'
+                <span class="text-white d-none d-lg-block">Welcome '.$_COOKIE['first_name'].'
               </li>
               <li class="nav-item d-block ml-lg-4">
               <a href="./logout.php" class="btn btn-neutral btn-icon">
