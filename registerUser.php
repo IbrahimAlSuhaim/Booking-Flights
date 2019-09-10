@@ -1,5 +1,6 @@
 <?php
-include 'connectToDB.php';
+include './connectToDB.php';
+session_start();
 $first_name=$_POST['first_name'];
 $last_name=$_POST['last_name'];
 $email=$_POST['email'];
@@ -10,10 +11,12 @@ $sql= "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`) VALUE
 
 
 if($con->query($sql)===TRUE){
-header('Location:./register.php?message=Thank you for registration');
+  $_SESSION['message'] = 'Thank you for registration';
+  header('Location:./register.php');
 }
 else{
-header('Location:./register.php?error=<b>Failed:</b> '.$con->error);
+  $_SESSION['error'] = $email.' already exist';
+  header('Location:./register.php');
 }
 
 
