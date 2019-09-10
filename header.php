@@ -46,9 +46,9 @@
             if(isset($_COOKIE['email'])) {
               echo '
               <li class="nav-item">
-              <small class="text-white">Welcome '.$_COOKIE['email'].'
+                <span class="text-white d-none d-lg-block">Welcome '.$_COOKIE['email'].'
               </li>
-              <li class="nav-item d-none d-lg-block ml-lg-4">
+              <li class="nav-item d-block ml-lg-4">
               <a href="./logout.php" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
               <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
             }
             else {
               echo '
-              <li class="nav-item d-none d-lg-block ml-lg-4">
+              <li class="nav-item d-block ml-lg-4">
               <a href="./login.php" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
