@@ -1,12 +1,13 @@
 <?php
-$email = $_POST['email'];
 include 'connectToDB.php';
+$email = $_POST['email'];
 
 if($result=$con->query("SELECT * FROM users WHERE email='$_POST[email]'")) {
   $row = $result->fetch_array(MYSQLI_ASSOC);
   if($_POST['password']!='') {
-    if($_POST["password"]==$row['password']){
+    if(password_verify($_POST['password'],$row['password'])){
       setcookie('email', $email, time() + (86400 * 30), "/"); // 86400 = 1 day
+      setcookie('first_name', $row['first_name'], time() + (86400 * 30), "/");
       header('Location:./index.php');
     }
     else {
