@@ -1,3 +1,8 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+ ?>
 <header class="header-global">
   <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
     <div class="container">
@@ -43,10 +48,16 @@
             </a>
           </li>
           <?php
-            if(isset($_COOKIE['email'])) {
+            if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
               echo '
               <li class="nav-item">
-                <span class="text-white d-none d-lg-block">Welcome '.$_COOKIE['first_name'].'
+                <span class="text-white d-none d-lg-block">Welcome ';
+                echo
+                (isset($_COOKIE['first_name'])?
+                   $_COOKIE['first_name']
+                  : $_SESSION['first_name'])
+                  ;
+              echo '
               </li>
               <li class="nav-item d-block ml-lg-4">
               <a href="./logout.php" class="btn btn-neutral btn-icon">
