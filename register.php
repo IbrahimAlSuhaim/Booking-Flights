@@ -1,3 +1,6 @@
+<?php
+    include './preventLoggedUsers.php';
+ ?>
 <!--
 
 =========================================================
@@ -55,22 +58,23 @@
                   <small>Sign up</small>
                 </div>
                 <?php
-                if(isset($_GET['error'])) {
+                if(isset($_SESSION['error'])) {
                   echo '
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                       <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
-                      <span class="alert-inner--text">'.$_GET['error'].'</span>
+                      <span class="alert-inner--text">'.$_SESSION['error'].'</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
                   ';
+                  unset($_SESSION['error']);
                 }
-                if(isset($_GET['message'])){
+                if(isset($_SESSION['message'])){
                   echo '
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                       <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
-                      <span class="alert-inner--text">'.$_GET['message'].'</span>
+                      <span class="alert-inner--text">'.$_SESSION['message'].'</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
@@ -81,6 +85,7 @@
                       </div>
                     </div>
                   ';
+                  unset($_SESSION['message']);
                 }
                  ?>
                 <form method="post" action="registerUser.php">
@@ -89,7 +94,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                       </div>
-                      <input class="form-control" placeholder="First Name" type="text" name="first_name">
+                      <input class="form-control" placeholder="First Name" type="text" name="first_name" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -97,7 +102,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Last Name" type="text" name="last_name">
+                      <input class="form-control" placeholder="Last Name" type="text" name="last_name" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -113,7 +118,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Password" type="password" name="password" required>
+                      <input class="form-control" placeholder="Password" type="password" name="password" minlength="8" required>
                     </div>
                   </div>
                   <div class="text-muted font-italic" hidden><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
