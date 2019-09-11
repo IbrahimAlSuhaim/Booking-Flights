@@ -1,8 +1,5 @@
 <?php
-  include './preventUnregisteredUsers.php';
- ?>
-
-<?php
+include './preventUnregisteredUsers.php';
 session_start();
 
 if (isset($_COOKIE['email'])) { // is user using cookies?
