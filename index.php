@@ -71,11 +71,7 @@
             <div class="row align-items-center justify-content-center">
               <div class="col-lg-6 text-center">
                 <img alt="image" src="./assets/img/brand/white.png" style="width: 200px;" class="img-fluid">
-                <p class="lead text-white">Welcome to the most powerful Flight Booking System in the Universe</p>
-                <div class="mt-5">
-                  <small class="text-white font-weight-bold mb-0 mr-2">template coded by</small>
-                  <img alt="image" src="./assets/img/brand/creativetim-white-slim.png" style="height: 28px;">
-                </div>
+                <p class="lead text-white">Welcome to our website</p>
               </div>
             </div>
           </div>
