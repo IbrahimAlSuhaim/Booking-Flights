@@ -44,15 +44,14 @@
           </li>
           <?php
             if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
+              $first_name = (isset($_COOKIE['first_name'])?
+                 $_COOKIE['first_name']
+                : $_SESSION['first_name']);
+
               echo '
               <li class="nav-item">
-                <span class="text-white d-none d-lg-block">Welcome ';
-                echo
-                (isset($_COOKIE['first_name'])?
-                   $_COOKIE['first_name']
-                  : $_SESSION['first_name'])
-                  ;
-              echo '
+                <span class="text-primary d-lg-none d-block">Welcome '.$first_name.'</span>
+                <span class="text-white d-none d-lg-block">Welcome '.$first_name.'</span>
               </li>
               <li class="nav-item d-block ml-lg-4">
               <a href="./logout.php" class="btn btn-neutral btn-icon">
