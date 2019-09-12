@@ -1,8 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
- ?>
 <header class="header-global">
   <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
     <div class="container">
