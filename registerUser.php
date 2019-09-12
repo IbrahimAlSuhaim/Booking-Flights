@@ -15,7 +15,7 @@ if($con->query($sql)===TRUE){
   header('Location:./register.php');
 }
 else{
-  $_SESSION['error'] = $email.' already exist';
+  $_SESSION['error'] = '<b>Faild:</b>'.$con->error;
   header('Location:./register.php');
 }
 
