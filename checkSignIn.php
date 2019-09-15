@@ -11,23 +11,25 @@ if($result=$con->query("SELECT * FROM users WHERE email='$_POST[email]'")) {
         setcookie('email', $email, time() + (86400 * 30), "/"); // 86400 = 1 day
         setcookie('first_name', $row['first_name'], time() + (86400 * 30), "/");
       }
-      $_SESSION['email']=$email;
-      $_SESSION['first_name']=$row['first_name'];
+      else {
+        $_SESSION['email']=$email;
+        $_SESSION['first_name']=$row['first_name'];
+      }
       header('Location:./index.php');
     }
     else {
-      $_SESSION['error'] = 'Wrong Username/Password';
+      $_SESSION['error'] = 'Wrong Email/Password';
       header('Location:./login.php');
     }
 
   }
   else {
-    $_SESSION['error'] = 'Enter Username and Password';
+    $_SESSION['error'] = 'Enter Email and Password';
     header('Location:./login.php');
   }
 }
 else {
-  $_SESSION['error'] = 'Wrong Username/Password';
+  $_SESSION['error'] = 'Wrong Email/Password';
   header('Location:./login.php');
 }
 
