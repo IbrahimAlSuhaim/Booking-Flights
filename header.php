@@ -1,7 +1,7 @@
 <header class="header-global">
   <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
     <div class="container">
-      <a class="navbar-brand mr-lg-5" href="./index.php">
+      <a class="navbar-brand mr-lg-5" href="./index">
         <img src="./assets/img/brand/white.png" alt="brand">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
         <div class="navbar-collapse-header">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <a href="./index.php">
+              <a href="./index">
                 <img src="./assets/img/brand/blue.png" alt="brand">
               </a>
             </div>
@@ -54,7 +54,7 @@
                 <span class="text-white d-none d-lg-block">Welcome '.$first_name.'</span>
               </li>
               <li class="nav-item d-block ml-lg-4">
-              <a href="./logout.php" class="btn btn-neutral btn-icon">
+              <a href="./logout" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
               <i class="fa fa-sign-out" aria-hidden="true"></i>
               </span>
@@ -65,7 +65,7 @@
             else {
               echo '
               <li class="nav-item d-block ml-lg-4">
-              <a href="./login.php" class="btn btn-neutral btn-icon">
+              <a href="./login" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               </span>
