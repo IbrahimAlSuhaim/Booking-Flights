@@ -82,14 +82,14 @@
                     </div>
                     <div class="row my-4">
                       <div class="col-12 text-center">
-                        <span>Go to <a href="login.php">login</a> Page!</span>
+                        <span>Go to <a href="login">login</a> Page!</span>
                       </div>
                     </div>
                   ';
                   unset($_SESSION['message']);
                 }
                  ?>
-                <form method="post" action="registerUser.php">
+                <form method="post" action="registerUser">
                   <div class="form-group">
                     <div class="input-group input-group-alternative mb-3">
                       <div class="input-group-prepend">

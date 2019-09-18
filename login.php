@@ -86,7 +86,7 @@
                   unset($_SESSION['message']);
                 }
                  ?>
-                <form action="./checkSignIn.php" method="post">
+                <form action="./checkSignIn" method="post">
                   <div class="form-group mb-3">
                     <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
@@ -117,7 +117,7 @@
             </div>
             <div class="row mt-3">
               <div class="col-12 text-right">
-                <a href="./register.php" class="text-light"><small>Create new account</small></a>
+                <a href="./register" class="text-light"><small>Create new account</small></a>
               </div>
             </div>
           </div>

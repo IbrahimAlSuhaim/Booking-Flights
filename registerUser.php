@@ -12,11 +12,11 @@ $sql= "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`) VALUE
 
 if($con->query($sql)===TRUE){
   $_SESSION['message'] = 'Thank you for registration';
-  header('Location:./register.php');
+  header('Location:./register');
 }
 else{
   $_SESSION['error'] = '<b>Faild:</b>'.$con->error;
-  header('Location:./register.php');
+  header('Location:./register');
 }
 
 

@@ -15,22 +15,22 @@ if($result=$con->query("SELECT * FROM admins WHERE username='$_POST[username]'")
         $_SESSION['username']=$username;
         $_SESSION['first_name']='Admin';
       }
-      header('Location:./dashboard.php');
+      header('Location:./dashboard');
     }
     else {
       $_SESSION['error'] = 'Wrong Username/Password';
-      header('Location:./admin.php');
+      header('Location:./admin');
     }
 
   }
   else {
     $_SESSION['error'] = 'Enter Username and Password';
-    header('Location:./admin.php');
+    header('Location:./admin');
   }
 }
 else {
   $_SESSION['error'] = 'Wrong Username/Password';
-  header('Location:./admin.php');
+  header('Location:./admin');
 }
 
 

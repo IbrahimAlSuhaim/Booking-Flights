@@ -15,22 +15,22 @@ if($result=$con->query("SELECT * FROM users WHERE email='$_POST[email]'")) {
         $_SESSION['email']=$email;
         $_SESSION['first_name']=$row['first_name'];
       }
-      header('Location:./index.php');
+      header('Location:./index');
     }
     else {
       $_SESSION['error'] = 'Wrong Email/Password';
-      header('Location:./login.php');
+      header('Location:./login');
     }
 
   }
   else {
     $_SESSION['error'] = 'Enter Email and Password';
-    header('Location:./login.php');
+    header('Location:./login');
   }
 }
 else {
   $_SESSION['error'] = 'Wrong Email/Password';
-  header('Location:./login.php');
+  header('Location:./login');
 }
 
 

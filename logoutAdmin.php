@@ -9,7 +9,7 @@ session_unset();
 session_destroy();// destroys all of the data associated with the current session.
 session_start();
 $_SESSION['message']='See you later ';
-header('Location:./admin.php');
+header('Location:./admin');
 
 
 
