@@ -41,7 +41,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
-        <a class="navbar-brand" href="./index.php">
+        <a class="navbar-brand" href="./index">
           <img src="./assets/img/brand/white.png" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@
                 unset($_SESSION['message']);
               }
                ?>
-              <form role="form" method="post" action="./signInAdmin.php" >
+              <form role="form" method="post" action="./signInAdmin" >
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
