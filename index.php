@@ -91,16 +91,16 @@
           <div class="container mb-5">
             <!-- Inputs -->
             <h3 class="h4 text-primary font-weight-bold mb-4" id="search">Search for tickets</h3>
-            <form class="" action="index.html" method="post">
+            <form class="" action="./flights" method="post">
               <div class="row">
                 <div class="col-lg-6 col-sm-12">
                   <div class="form-group">
                     <label for="inputGroupSelect01">From</label>
                     <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
-                        <option selected>Choose...</option>
-                        <option value="1">Riyadh (RUH)</option>
-                        <option value="2">Jeddah (JED)</option>
+                      <select class="custom-select" name="from" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="RUH">Riyadh (RUH)</option>
+                        <option value="JED">Jeddah (JED)</option>
                       </select>
                     </div>
                   </div>
@@ -109,10 +109,10 @@
                   <div class="form-group">
                     <label for="inputGroupSelect01">To</label>
                     <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
-                        <option selected>Choose...</option>
-                        <option value="1">Riyadh (RUH)</option>
-                        <option value="2">Jeddah (JED)</option>
+                      <select class="custom-select" name="to" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="RUH">Riyadh (RUH)</option>
+                        <option value="JED">Jeddah (JED)</option>
                       </select>
                     </div>
                   </div>
@@ -121,20 +121,20 @@
               <div class="row">
                 <div class="col-3">
                   <div class="custom-control custom-radio mb-3">
-                    <input name="directionality" class="custom-control-input" id="return" checked="" type="radio">
+                    <input name="directionality" class="custom-control-input" id="return" value="return" checked="" type="radio">
                     <label class="custom-control-label" for="return"><span>Return</span></label>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="custom-control custom-radio mb-3">
-                    <input name="directionality" class="custom-control-input" id="oneWay" type="radio">
+                    <input name="directionality" class="custom-control-input" id="oneWay" value="oneWay" type="radio">
                     <label class="custom-control-label" for="oneWay"><span>One Way</span></label>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 mt-4 mt-md-0">
-                  <small class="d-block text-uppercase font-weight-bold mb-3">Date range</small>
+                  <small class="d-block text-uppercase font-weight-bold mb-3">Departure - Return</small>
                   <div class="input-daterange datepicker row align-items-center">
                     <div class="col">
                       <div class="form-group focused">
@@ -142,7 +142,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" placeholder="Start date" type="text" value="06/18/2019">
+                          <input class="form-control" placeholder="Departure date" type="text" name="departure_date" required>
                         </div>
                       </div>
                     </div>
@@ -152,7 +152,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" placeholder="End date" type="text" value="06/22/2019">
+                          <input class="form-control" placeholder="Return date" type="text" name="return_date" required>
                         </div>
                       </div>
                     </div>
@@ -162,10 +162,10 @@
               <div class="row">
                 <div class="col-lg-4 col-sm-12">
                   <div class="form-group">
-                    <label for="inputGroupSelect01">How many are going?</label>
+                    <label for="passengers">How many are going?</label>
                     <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
-                        <option selected>Choose...</option>
+                      <select class="custom-select" id="passengers" name="passengers" required>
+                        <option selected disabled value="">Choose...</option>
                         <option value="1">1 traveler</option>
                         <option value="2">2 travelers</option>
                         <option value="3">3 travelers</option>
@@ -180,19 +180,19 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                   <div class="form-group">
-                    <label for="inputGroupSelect01">Please choose your ticket type</label>
+                    <label for="class">Please choose your ticket type</label>
                     <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
-                        <option selected>Choose...</option>
-                        <option value="1">Guest</option>
-                        <option value="2">Business</option>
-                        <option value="3">First</option>
+                      <select class="custom-select" id="class" name="class" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Business">Business</option>
+                        <option value="First">First</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-2 col-sm-12 offset-md-1 mt-4">
-                  <button class="btn btn-1 btn-primary" type="button">search</button>
+                <div class="col-lg-1 col-sm-12 offset-md-3 mt-4">
+                  <button class="btn btn-1 btn-primary" type="submit">GO!</button>
                 </div>
               </div>
             </form>
