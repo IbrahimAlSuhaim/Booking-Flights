@@ -86,8 +86,7 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  class=" active" ">
-          <a class=" nav-link active " href=" ./dashboard"> <i class="ni ni-tv-2 text-primary"></i> Manage flights
-            </a>
+          <a class=" nav-link active " href=" ./dashboard"> <i class="ni ni-tv-2 text-primary"></i>Manage flights</a>
           </li>
         </ul>
       </div>
