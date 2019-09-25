@@ -75,6 +75,7 @@
               <div class="col-lg-6 text-center">
                 <img alt="image" src="./assets/img/brand/white.png" style="width: 200px;" class="img-fluid">
                 <p class="lead text-white">Welcome to our website</p>
+                <a href="#search" class="btn btn-1 btn-primary" type>Book A trip</a>
               </div>
             </div>
           </div>
@@ -85,75 +86,79 @@
             <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
           </svg>
         </div>
-        </section>
+      </section>
         <section class="section pb-0 section-components">
           <div class="container mb-5">
             <!-- Inputs -->
-            <h3 class="h4 text-success font-weight-bold mb-4" id="search">Search for tickets</h3>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <div class="form-group">
-                  <input type="text" placeholder="Regular" class="form-control">
-                </div>
-                <div class="form-group">
-                  <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Search" type="text">
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="form-group">
-                  <input type="text" placeholder="Regular" class="form-control" disabled="">
-                </div>
-                <div class="form-group">
-                  <div class="input-group mb-4">
-                    <input class="form-control" placeholder="Birthday" type="text">
-                    <div class="input-group-append">
-                      <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+            <h3 class="h4 text-primary font-weight-bold mb-4" id="search">Search for tickets</h3>
+            <form class="" action="index.html" method="post">
+              <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="inputGroupSelect01">From</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
+                        <option selected>Choose...</option>
+                        <option value="1">Riyadh (RUH)</option>
+                        <option value="2">Jeddah (JED)</option>
+                      </select>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <div class="form-group has-success">
-                  <input type="text" placeholder="Success" class="form-control is-valid">
-                </div>
-                <div class="form-group has-danger">
-                  <input type="email" placeholder="Error Input" class="form-control is-invalid">
-                </div>
-              </div>
-              <div class="col-md-8 mt-4 mt-md-0">
-                <small class="d-block text-uppercase font-weight-bold mb-3">Departure - Return</small>
-                <div class="input-daterange datepicker row align-items-center">
-                  <div class="col">
-                    <div class="form-group focused">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Departure date" type="text" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group focused">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Return date" type="text" value="">
-                      </div>
+                <div class="col-lg-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="inputGroupSelect01">To</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
+                        <option selected>Choose...</option>
+                        <option value="1">Riyadh (RUH)</option>
+                        <option value="2">Jeddah (JED)</option>
+                      </select>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="inputGroupSelect01">How many are going?</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
+                        <option selected>Choose...</option>
+                        <option value="1">1 traveler</option>
+                        <option value="2">2 travelers</option>
+                        <option value="3">3 travelers</option>
+                        <option value="4">4 travelers</option>
+                        <option value="5">5 travelers</option>
+                        <option value="6">6 travelers</option>
+                        <option value="7">7 travelers</option>
+                        <option value="8">8 travelers</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="inputGroupSelect01">Please choose your ticket type</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="inputGroupSelect01" name="from" required>
+                        <option selected>Choose...</option>
+                        <option value="1">Guest</option>
+                        <option value="2">Business</option>
+                        <option value="3">First</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-1">
+                  <button class="btn btn-1 btn-primary" type="button">search</button>
+                </div>
+              </div>
+            </form>
           </div>
-        </section>
-      </div>
+      </section>
     </div>
   </main>
   <footer class="footer">
