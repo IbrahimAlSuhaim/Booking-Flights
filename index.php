@@ -119,7 +119,48 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-3">
+                  <div class="custom-control custom-radio mb-3">
+                    <input name="directionality" class="custom-control-input" id="return" checked="" type="radio">
+                    <label class="custom-control-label" for="return"><span>Return</span></label>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="custom-control custom-radio mb-3">
+                    <input name="directionality" class="custom-control-input" id="oneWay" type="radio">
+                    <label class="custom-control-label" for="oneWay"><span>One Way</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mt-4 mt-md-0">
+                  <small class="d-block text-uppercase font-weight-bold mb-3">Date range</small>
+                  <div class="input-daterange datepicker row align-items-center">
+                    <div class="col">
+                      <div class="form-group focused">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                          </div>
+                          <input class="form-control" placeholder="Start date" type="text" value="06/18/2019">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group focused">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                          </div>
+                          <input class="form-control" placeholder="End date" type="text" value="06/22/2019">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-12">
                   <div class="form-group">
                     <label for="inputGroupSelect01">How many are going?</label>
                     <div class="input-group mb-3">
@@ -137,7 +178,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-4 col-sm-12">
                   <div class="form-group">
                     <label for="inputGroupSelect01">Please choose your ticket type</label>
                     <div class="input-group mb-3">
@@ -150,9 +191,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row justify-content-end">
-                <div class="col-1">
+                <div class="col-lg-2 col-sm-12 offset-md-1 mt-4">
                   <button class="btn btn-1 btn-primary" type="button">search</button>
                 </div>
               </div>
@@ -178,6 +217,10 @@
   <script src="./assets/vendor/popper/popper.min.js"></script>
   <script src="./assets/vendor/bootstrap/bootstrap.min.js"></script>
   <script src="./assets/vendor/headroom/headroom.min.js"></script>
+  <!-- Optional JS -->
+  <script src="./assets/vendor/onscreen/onscreen.min.js"></script>
+  <script src="./assets/vendor/nouislider/js/nouislider.min.js"></script>
+  <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.1.0"></script>
 </body>
