@@ -121,7 +121,7 @@
               <div class="row">
                 <div class="col-3">
                   <div class="custom-control custom-radio mb-3">
-                    <input name="directionality" class="custom-control-input" id="return" value="return" checked="" type="radio">
+                    <input name="directionality" class="custom-control-input" id="return" value="return" checked type="radio">
                     <label class="custom-control-label" for="return"><span>Return</span></label>
                   </div>
                 </div>
@@ -132,9 +132,9 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" id="date">
                 <div class="col-md-12 mt-4 mt-md-0">
-                  <small class="d-block text-uppercase font-weight-bold mb-3">Departure - Return</small>
+                  <small class="d-block text-uppercase font-weight-bold mb-3" id="datepicker_label">Departure - Return</small>
                   <div class="input-daterange datepicker row align-items-center">
                     <div class="col">
                       <div class="form-group focused">
@@ -148,11 +148,11 @@
                     </div>
                     <div class="col">
                       <div class="form-group focused">
-                        <div class="input-group">
+                        <div class="input-group" id="return_picker">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" placeholder="Return date" type="text" name="return_date" required>
+                          <input class="form-control" id="return_date" placeholder="Return date" type="text" name="return_date" required>
                         </div>
                       </div>
                     </div>
@@ -223,6 +223,8 @@
   <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.1.0"></script>
+  <!-- Custom JS -->
+  <script src="./assets/js/custom.js"></script>
 </body>
 
 </html>
