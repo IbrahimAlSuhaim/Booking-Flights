@@ -13,6 +13,17 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+<?php
+
+include_once 'connectToDB_Local.php';
+
+$sql_display = " SELECT * FROM `flights` ";
+
+$result_display = mysqli_query($con,$sql_display);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,8 +143,32 @@
     <section class="section pb-0 section-components mt-5">
       <div class="container mb-5">
         <!-- Inputs -->
+<?php
+                if(isset($_GET['failMsg'])) {
+                  echo '
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+                      <span class="alert-inner--text">'.$_GET['failMsg'].'</span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                  ';
+                }
+                if(isset($_GET['successMsg'])) {
+                  echo '
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                      <span class="alert-inner--text">'.$_GET['successMsg'].'</span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                  ';
+                }
+?>
         <h3 class="h4 text-success font-weight-bold mb-4">Add flight</h3>
-        <form class="" action="index.html" method="post">
+        <form class="" action="addFlight.php" method="post">
           <div class="row">
             <div class="col-lg-6 col-sm-6">
               <div class="form-group">
@@ -141,10 +176,10 @@
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">from</label>
                   </div>
-                  <select class="custom-select" id="inputGroupSelect01" name="from" required>
-                    <option selected>Choose...</option>
-                    <option value="1">Riyadh (RUH )</option>
-                    <option value="2">Jeddah (JED)</option>
+                  <select class="custom-select" id="inputGroupSelect01" name="from">
+                    <option selected value="">Choose...</option>
+                    <option>Riyadh (RUH )</option>
+                    <option>Jeddah (JED)</option>
                   </select>
                 </div>
               </div>
@@ -154,8 +189,8 @@
                     <label class="input-group-text" for="inputGroupSelect02">Carrier</label>
                   </div>
                   <select class="custom-select" id="inputGroupSelect02" name="carrier">
-                    <option selected>Choose...</option>
-                    <option value="1">Saudi Airlines</option>
+                    <option selected value="">Choose...</option>
+                    <option>Saudi Airlines</option>
                   </select>
                 </div>
               </div>
@@ -167,9 +202,9 @@
                     <label class="input-group-text" for="inputGroupSelect03">to</label>
                   </div>
                   <select class="custom-select" id="inputGroupSelect03" name="to">
-                    <option selected>Choose...</option>
-                    <option value="1">Riyadh (RUH )</option>
-                    <option value="2">Jeddah (JED)</option>
+                    <option selected value="">Choose...</option>
+                    <option>Riyadh (RUH )</option>
+                    <option>Jeddah (JED)</option>
                   </select>
                 </div>
               </div>
@@ -178,9 +213,10 @@
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect04">Airplane</label>
                   </div>
-                  <select class="custom-select" id="inputGroupSelect04" name="Airplane">
-                    <option selected>Choose...</option>
-                    <option value="1">Boeing 777-300ER</option>
+                  <select class="custom-select" id="inputGroupSelect04" name="airplane">
+                    <option selected value="">Choose...</option>
+                    <option>Boeing 777-300ER</option>
+                    <option>Airbus A330</option>
                   </select>
                 </div>
               </div>
@@ -222,12 +258,65 @@
               </div>
             </div>
             <div class="col-lg-12 col-sm-12">
-              <button class="btn btn-1 btn-primary" type="button">Add</button>
+              <button class="btn btn-1 btn-primary" type="submit" name="submit">Add</button>
             </div>
           </div>
         </form>
       </div>
     </section>
+
+
+
+    <section class="container">
+
+    <table class="table">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">flight_number</th>
+            <th scope="col">from</th>
+            <th scope="col">to</th>
+            <th scope="col">carrier</th>
+            <th scope="col">airplane</th>
+            <th scope="col">departure_date</th>
+            <th scope="col">departure_time</th>
+            <th scope="col">arrival_date</th>
+            <th scope="col">arrival_time</th>
+            <th scope="col">capacity</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+            if(mysqli_num_rows($result_display) > 0)
+                while($row = mysqli_fetch_assoc($result_display)) {
+                  echo"
+                  <tr>
+                    <th>".$row['flight_number']."</th>
+                    <td>".$row['from']."</td>
+                    <td>".$row['to']."</td>
+                    <td>".$row['carrier']."</td>
+                    <td>".$row['airplane']."</td>
+                    <td>".$row['departure_date']."</td>
+                    <td>".$row['departure_time']."</td>
+                    <td>".$row['arrival_date']."</td>
+                    <td>".$row['arrival_time']."</td>
+                    <td>".$row['capacity']."</td>
+                  </tr>
+                  ";
+                }
+            ?>
+        </tbody>
+    </table>
+
+    </section>
+
+
+
+
+
+
+
+
+
   </div>
   <!--   Core   -->
   <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>

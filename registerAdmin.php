@@ -1,5 +1,5 @@
 <?php
-include './connectToDB.php';
+include './connectToDB_Local.php';
 session_start();
 $username='Admin';
 

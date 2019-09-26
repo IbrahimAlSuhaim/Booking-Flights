@@ -1,5 +1,5 @@
 <?php
-include './connectToDB.php';
+include './connectToDB_Local.php';
 session_start();
 $first_name=$_POST['first_name'];
 $last_name=$_POST['last_name'];
