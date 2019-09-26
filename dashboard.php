@@ -31,7 +31,7 @@ $result_display = mysqli_query($con,$sql_display);
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Bookslights Dashboard
+    Book Flights Dashboard
   </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -97,8 +97,7 @@ $result_display = mysqli_query($con,$sql_display);
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  class=" active" ">
-          <a class=" nav-link active " href=" ./dashboard"> <i class="ni ni-tv-2 text-primary"></i> Manage flights
-            </a>
+          <a class=" nav-link active " href=" ./dashboard"> <i class="ni ni-tv-2 text-primary"></i>Manage flights</a>
           </li>
         </ul>
       </div>
