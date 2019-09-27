@@ -177,7 +177,7 @@ $result_display = mysqli_query($con,$sql_display);
                   </div>
                   <select class="custom-select" id="inputGroupSelect01" name="from">
                     <option selected value="">Choose...</option>
-                    <option>Riyadh (RUH )</option>
+                    <option>Riyadh (RUH)</option>
                     <option>Jeddah (JED)</option>
                   </select>
                 </div>
@@ -188,8 +188,11 @@ $result_display = mysqli_query($con,$sql_display);
                     <label class="input-group-text" for="inputGroupSelect02">Carrier</label>
                   </div>
                   <select class="custom-select" id="inputGroupSelect02" name="carrier">
-                    <option selected value="">Choose...</option>
-                    <option>Saudi Airlines</option>
+                    <option selected value="" disabled>Choose...</option>
+                    <option value="SV">Saudia (SV)</option>
+                    <option value="XY">Flynas (XY)</option>
+                    <option value="6S">SaudiGulf (6S)</option>
+                    <option value="F3">Flyadeal (F3)</option>
                   </select>
                 </div>
               </div>
@@ -256,6 +259,15 @@ $result_display = mysqli_query($con,$sql_display);
                 </div>
               </div>
             </div>
+            <div class="col-lg-6 col-sm-6">
+              <div class="form-group">
+                <div class="input-group mb-4">
+                  <input class="form-control" placeholder="Price factor" type="number" name="price_factor" maxlength="3">
+                  <div class="input-group-append">
+                    <span class="input-group-text"></span>
+                  </div>
+                </div>
+              </div>
             <div class="col-lg-12 col-sm-12">
               <button class="btn btn-1 btn-primary" type="submit" name="submit">Add</button>
             </div>
@@ -281,6 +293,8 @@ $result_display = mysqli_query($con,$sql_display);
             <th scope="col">arrival_date</th>
             <th scope="col">arrival_time</th>
             <th scope="col">capacity</th>
+            <th scope="col">reserved</th>
+            <th scope="col">price factor</th>
           </tr>
         </thead>
         <tbody>
@@ -299,6 +313,8 @@ $result_display = mysqli_query($con,$sql_display);
                     <td>".$row['arrival_date']."</td>
                     <td>".$row['arrival_time']."</td>
                     <td>".$row['capacity']."</td>
+                    <td>".$row['reserved']."</td>
+                    <td>".$row['price_factor']."</td>
                   </tr>
                   ";
                 }
