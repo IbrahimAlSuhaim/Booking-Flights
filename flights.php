@@ -29,6 +29,17 @@
     $minutes = ($time % 60);
     return $hours.'h '.$minutes.'m';
   }
+  function getPrice($type) {
+    if($type==='Guest'){
+      return 105.40;
+    }
+    else if ($type==='Business'){
+      return 135.40;
+    }
+    else {
+      return 165.40;
+    }
+  }
 ?>
 <!--
 
@@ -201,7 +212,7 @@
                         <p class="font-weight">Class: '.$class.'</p>
                       </div>
                       <div class="col-lg-3 col-sm-4">
-                        <p class="font-weight-bold">Price: '.($row['price_factor']*105.40).' SR</p>
+                        <p class="font-weight-bold">Price: '.($row['price_factor']*getPrice($class)).' SR</p>
                       </div>
                       <div class="col-lg-3 col-sm-12">
                         <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
@@ -257,7 +268,7 @@
                         <p class="font-weight">Class: '.$class.'</p>
                       </div>
                       <div class="col-lg-3 col-sm-4">
-                        <p class="font-weight-bold">Price: '.($row['price_factor']*105.40).' SR</p>
+                        <p class="font-weight-bold">Price: '.($row['price_factor']*getPrice($class)).' SR</p>
                       </div>
                       <div class="col-lg-3 col-sm-12">
                         <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
