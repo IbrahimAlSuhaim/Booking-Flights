@@ -93,14 +93,30 @@
             <h3 class="h4 text-primary font-weight-bold mb-4" id="search">Search for tickets</h3>
             <form class="" action="./flights" method="post">
               <div class="row">
+                <?php
+                  if(isset($_SESSION['error'])){
+                    echo '
+                      <div class="col-12">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+                          <span class="alert-inner--text">'.$_SESSION['error'].'</span>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                      </div>
+                      ';
+                    unset($_SESSION['error']);
+                  }
+                 ?>
                 <div class="col-lg-6 col-sm-12">
                   <div class="form-group">
                     <label for="inputGroupSelect01">From</label>
                     <div class="input-group mb-3">
                       <select class="custom-select" name="from" required>
                         <option selected disabled value="">Choose...</option>
-                        <option value="RUH">Riyadh (RUH)</option>
-                        <option value="JED">Jeddah (JED)</option>
+                        <option>Riyadh (RUH)</option>
+                        <option>Jeddah (JED)</option>
                       </select>
                     </div>
                   </div>
@@ -111,8 +127,8 @@
                     <div class="input-group mb-3">
                       <select class="custom-select" name="to" required>
                         <option selected disabled value="">Choose...</option>
-                        <option value="RUH">Riyadh (RUH)</option>
-                        <option value="JED">Jeddah (JED)</option>
+                        <option>Riyadh (RUH)</option>
+                        <option>Jeddah (JED)</option>
                       </select>
                     </div>
                   </div>
@@ -135,14 +151,14 @@
               <div class="row" id="date">
                 <div class="col-md-12 mt-4 mt-md-0">
                   <small class="d-block text-uppercase font-weight-bold mb-3" id="datepicker_label">Departure - Return</small>
-                  <div class="input-daterange datepicker row align-items-center">
+                  <div class="input-daterange datepicker row align-items-center" data-date-format="yyyy-mm-dd">
                     <div class="col">
                       <div class="form-group focused">
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" placeholder="Departure date" type="text" name="departure_date" required>
+                          <input class="form-control" id="departure_date" placeholder="Departure date" type="text" name="departure_date"  required>
                         </div>
                       </div>
                     </div>
