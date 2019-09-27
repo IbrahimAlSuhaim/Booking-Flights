@@ -181,7 +181,6 @@
                     <label for="passengers">How many are going?</label>
                     <div class="input-group mb-3">
                       <select class="custom-select" id="passengers" name="passengers" required>
-                        <option selected disabled value="">Choose...</option>
                         <option value="1">1 traveler</option>
                         <option value="2">2 travelers</option>
                         <option value="3">3 travelers</option>
@@ -199,7 +198,6 @@
                     <label for="class">Please choose your ticket type</label>
                     <div class="input-group mb-3">
                       <select class="custom-select" id="class" name="class" required>
-                        <option selected disabled value="">Choose...</option>
                         <option value="Guest">Guest</option>
                         <option value="Business">Business</option>
                         <option value="First">First</option>
