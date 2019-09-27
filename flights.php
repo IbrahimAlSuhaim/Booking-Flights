@@ -90,6 +90,47 @@
         </div>
       </section>
     </div>
+    <div class="row justify-content-center text-center">
+      <ul class="nav nav-pills nav-pills-circle" role="tablist">
+        <li class="nav-item mx-4">
+          <a class="nav-link active" role="tab" aria-selected="true">
+            <span><i class="fa fa-check" aria-hidden="true"></i></span>
+          </a>
+          <p>Search</p>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link active" role="tab" aria-selected="true">
+            <span>2</span>
+          </a>
+          <p class="font-weight-bold">Flights</p>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link" role="tab" aria-selected="false">
+            <span>3</span>
+          </a>
+          <p>Passenger</p>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link" role="tab" aria-selected="false">
+            <span>4</span>
+          </a>
+          <p>Seats</p>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link" role="tab" aria-selected="false">
+            <span>5</span>
+          </a>
+          <p>Payment</p>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link" role="tab" aria-selected="false">
+            <span>6</span>
+          </a>
+          <p>Confirmation</p>
+        </li>
+      </ul>
+    </div>
+    <hr>
     <?php
       echo '
         <div class="container mb-5">
@@ -132,7 +173,7 @@
             <div class="col-12">
               <h3>Select your departure flight</h3>
             </div>';
-            While($row=mysqli_fetch_array($result)){
+            while($row=mysqli_fetch_array($result)){
               echo '
               <div class="col-lg-8 col-sm-12 text-center py-2">
                 <div class="card card-lift shadow border-0">
@@ -153,13 +194,16 @@
                     </div>
                     <hr>
                     <div class="row justify-content-between">
-                      <div class="col-lg-4 col-sm-6">
+                      <div class="col-lg-3 col-sm-4">
+                        <img src="./assets/img/carriers/'.$row['carrier'].'.png" alt=carrier: "'.$row['carrier'].'" title="'.$row['carrier'].'">
+                      </div>
+                      <div class="col-lg-3 col-sm-4">
                         <p class="font-weight">Class: '.$class.'</p>
                       </div>
-                      <div class="col-lg-4 col-sm-6">
+                      <div class="col-lg-3 col-sm-4">
                         <p class="font-weight-bold">Price: '.($row['price_factor']*105.40).' SR</p>
                       </div>
-                      <div class="col-lg-4 col-sm-12">
+                      <div class="col-lg-3 col-sm-12">
                         <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
                       </div>
                     </div>
@@ -170,59 +214,67 @@
               </div>
             ';
             }
+          echo '</div>';
 
-          if ($directionality !== "oneWay") {
+          if ($directionality !== "oneWay"){
             echo '
-            <div class="row justify-content-center row-grid">
+            <div class="row justify-content-center row-grid mt-3">
               <div class="col-12">
                 <h3>Select your return flight</h3>
-              </div>
+              </div>';
 
-              <div class="col-lg-8 col-sm-12 text-center py-4">
-                <div class="card card-lift--hover shadow border-0">
+            $sql="SELECT * FROM flights WHERE departure_date LIKE '$return_date' AND `to`='$origin' AND `from`='$destination'";
+            $result=$con->query($sql);
+            if(!$row=mysqli_fetch_array($result)) {
+              echo '<p>No return flights -.-!</p>';
+            }
+
+            while($row=mysqli_fetch_array($result)) {
+              echo '
+              <div class="col-lg-8 col-sm-12 text-center py-2">
+                <div class="card card-lift shadow border-0">
                   <div class="card-body py-3">
                     <div class="row justify-content-center">
                       <div class="col-4">
-                        <span class="d-block mb-1">04:10</span>
-                        <span class="d-block mb-1">JED</span>
-                        <small class="d-block mb-1">(Jeddah)</small>
+                        <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
+                        <span class="d-block mb-1">'.$row['from'].'</span>
                       </div>
                       <div class="col-4">
                         <small class="d-block mb-1 text-success">Direct</small>
-                        <hr>
-                        <small class="d-block mb-1">Duration</small>
-                        <small class="d-block mb-1">1h 40m</small>
+                        <small class="d-block mb-1">Duration: '.getDuration($row['departure_time'], $row['arrival_time']).'</small>
                       </div>
                       <div class="col-4">
-                        <span class="d-block mb-1">05:50</span>
-                        <span class="d-block mb-1">RUH</span>
-                        <small class="d-block mb-1">(Riyadh)</small>
+                        <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
+                        <span class="d-block mb-1">'.$row['to'].'</span>
                       </div>
                     </div>
                     <hr>
                     <div class="row justify-content-between">
-                      <div class="col-lg-4 col-sm-6">
-                        <p class="font-weight-bold">Class: Guest</p>
+                      <div class="col-lg-3 col-sm-4">
+                        <img src="./assets/img/carriers/'.$row['carrier'].'.png" alt=carrier: "'.$row['carrier'].'" title="'.$row['carrier'].'">
                       </div>
-                      <div class="col-lg-4 col-sm-6">
-                        <p class="font-weight-bold">Price: 460.75 SR</p>
+                      <div class="col-lg-3 col-sm-4">
+                        <p class="font-weight">Class: '.$class.'</p>
+                      </div>
+                      <div class="col-lg-3 col-sm-4">
+                        <p class="font-weight-bold">Price: '.($row['price_factor']*105.40).' SR</p>
+                      </div>
+                      <div class="col-lg-3 col-sm-12">
+                        <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
                       </div>
                     </div>
-                    <div class="row justify-content-end">
-                      <div class="col-lg-4 col-sm-12">
-                        <button class="btn btn-1 btn-warning" type="button">Select</button>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
+              </div>';
+            }
 
-              </div>
+            echo '
             </div>';
           }
-        echo '</div>
-      ';
+        echo '
+        </div>';
      ?>
-
   </main>
   <footer class="footer">
     <div class="container">
