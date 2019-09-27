@@ -16,7 +16,7 @@
 
 <?php
 
-include_once 'connectToDB_Local.php';
+include_once './connectToDB.php';
 
 $sql_display = " SELECT * FROM `flights` ";
 

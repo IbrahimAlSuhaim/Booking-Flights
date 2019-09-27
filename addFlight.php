@@ -1,6 +1,6 @@
 <?php
 
-include 'connectToDB_Local.php';
+include './connectToDB.php';
 
 if(!isset($_POST['submit']))
 {

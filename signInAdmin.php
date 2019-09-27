@@ -1,5 +1,5 @@
 <?php
-include 'connectToDB_Local.php';
+include 'connectToDB.php';
 session_start();
 $username = $_POST['username'];
 
