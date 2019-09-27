@@ -10,6 +10,25 @@
   }
   $passengers = $_POST['passengers'];
   $class = $_POST['class'];
+
+  include 'connectToDB.php';
+  $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination'";
+  $result=$con->query($sql);
+  if(!$row=mysqli_fetch_array($result)) {
+      $_SESSION['error'] = "Sorry we couldn't find any flight";
+      header("Location: index#search");
+      exit();
+  }
+
+  function getDuration($a , $b) {
+    $start = strtotime($a);
+    $end = strtotime($b);
+    $time = (int)(($end - $start) / 60);
+
+    $hours = floor($time / 60);
+    $minutes = ($time % 60);
+    return $hours.'h '.$minutes.'m';
+  }
 ?>
 <!--
 
@@ -112,48 +131,46 @@
           <div class="row justify-content-center row-grid">
             <div class="col-12">
               <h3>Select your departure flight</h3>
-            </div>
+            </div>';
+            While($row=mysqli_fetch_array($result)){
+              echo '
+              <div class="col-lg-8 col-sm-12 text-center py-2">
+                <div class="card card-lift shadow border-0">
+                  <div class="card-body py-3">
+                    <div class="row justify-content-center">
+                      <div class="col-4">
+                        <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
+                        <span class="d-block mb-1">'.$row['from'].'</span>
+                      </div>
+                      <div class="col-4">
+                        <small class="d-block mb-1 text-success">Direct</small>
+                        <small class="d-block mb-1">Duration: '.getDuration($row['departure_time'], $row['arrival_time']).'</small>
+                      </div>
+                      <div class="col-4">
+                        <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
+                        <span class="d-block mb-1">'.$row['to'].'</span>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row justify-content-between">
+                      <div class="col-lg-4 col-sm-6">
+                        <p class="font-weight">Class: '.$class.'</p>
+                      </div>
+                      <div class="col-lg-4 col-sm-6">
+                        <p class="font-weight-bold">Price: '.($row['price_factor']*105.40).' SR</p>
+                      </div>
+                      <div class="col-lg-4 col-sm-12">
+                        <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
+                      </div>
+                    </div>
 
-            <div class="col-lg-8 col-sm-12 text-center py-4">
-              <div class="card card-lift--hover shadow border-0">
-                <div class="card-body py-3">
-                  <div class="row justify-content-center">
-                    <div class="col-4">
-                      <span class="d-block mb-1">02:30</span>
-                      <span class="d-block mb-1">RUH</span>
-                      <small class="d-block mb-1">(Riyadh)</small>
-                    </div>
-                    <div class="col-4">
-                      <small class="d-block mb-1 text-success">Direct</small>
-                      <hr>
-                      <small class="d-block mb-1">Duration</small>
-                      <small class="d-block mb-1">1h 40m</small>
-                    </div>
-                    <div class="col-4">
-                      <span class="d-block mb-1">04:10</span>
-                      <span class="d-block mb-1">JED</span>
-                      <small class="d-block mb-1">(Jeddah)</small>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row justify-content-between">
-                    <div class="col-lg-4 col-sm-6">
-                      <p class="font-weight-bold">Class: Guest</p>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                      <p class="font-weight-bold">Price: 460.75 SR</p>
-                    </div>
-                  </div>
-                  <div class="row justify-content-end">
-                    <div class="col-lg-4 col-sm-12">
-                      <button class="btn btn-1 btn-warning" type="button">Select</button>
-                    </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
-          </div>';
+              </div>
+            ';
+            }
+
           if ($directionality !== "oneWay") {
             echo '
             <div class="row justify-content-center row-grid">
