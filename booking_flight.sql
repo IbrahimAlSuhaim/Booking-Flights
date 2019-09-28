@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 26, 2019 at 04:56 PM
--- Server version: 5.7.26
--- PHP Version: 7.2.18
+-- Generation Time: Sep 28, 2019 at 04:31 PM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,6 +47,35 @@ INSERT INTO `admins` (`admin_id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `airports`
+--
+
+DROP TABLE IF EXISTS `airports`;
+CREATE TABLE IF NOT EXISTS `airports` (
+  `code` varchar(3) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `airports`
+--
+
+INSERT INTO `airports` (`code`, `name`) VALUES
+('MED', 'Madinah'),
+('AHB', 'Abha'),
+('BHH', 'Bisha'),
+('GIZ', 'Jazan'),
+('ABT', 'Al-Baha'),
+('ELQ', 'Gassim'),
+('DMM', 'Dammam'),
+('JED', 'Jeddah'),
+('RUH', 'Riyadh'),
+('TUU', 'Tabuk');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `flights`
 --
 
@@ -58,10 +87,12 @@ CREATE TABLE IF NOT EXISTS `flights` (
   `carrier` varchar(50) NOT NULL,
   `airplane` varchar(50) NOT NULL,
   `departure_date` date NOT NULL,
-  `departure_time` time(6) NOT NULL,
+  `departure_time` time NOT NULL,
   `arrival_date` date NOT NULL,
-  `arrival_time` time(6) NOT NULL,
+  `arrival_time` time NOT NULL,
   `capacity` int(10) NOT NULL,
+  `reserved` int(3) NOT NULL DEFAULT '0',
+  `price_factor` double NOT NULL,
   PRIMARY KEY (`flight_number`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -69,11 +100,21 @@ CREATE TABLE IF NOT EXISTS `flights` (
 -- Dumping data for table `flights`
 --
 
-INSERT INTO `flights` (`flight_number`, `from`, `to`, `carrier`, `airplane`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `capacity`) VALUES
-('5d8cc1c245954', 'Riyadh (RUH )', 'Jeddah (JED)', 'Saudi Airlines', 'Boeing 777-300ER', '2019-09-26', '02:50:00.000000', '2019-09-27', '05:50:00.000000', 365),
-('5d8cea001ff62', 'Jeddah (JED)', 'Riyadh (RUH )', 'Saudi Airlines', 'Airbus A330', '2019-09-26', '02:50:00.000000', '2019-09-27', '05:50:00.000000', 293),
-('5d8cea8a85e17', 'Riyadh (RUH )', 'Jeddah (JED)', 'Choose...', 'Airbus A330', '2019-09-20', '02:50:00.000000', '2019-09-30', '05:50:00.000000', 293),
-('5d8cec9c68abe', 'Riyadh (RUH )', 'Jeddah (JED)', 'Saudi Airlines', 'Boeing 777-300ER', '2019-09-26', '02:50:00.000000', '2019-09-27', '05:50:00.000000', 365);
+INSERT INTO `flights` (`flight_number`, `from`, `to`, `carrier`, `airplane`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `capacity`, `reserved`, `price_factor`) VALUES
+('SV1009', 'Riyadh (RUH)', 'Madinah (MED)', 'SV', 'Airbus A330', '2019-09-23', '01:10:00', '2019-09-23', '02:45:00', 293, 0, 3.5),
+('SV1008', 'Dammam (DMM)', 'Riyadh (RUH)', 'SV', 'Airbus A330', '2019-10-01', '00:20:00', '2019-10-01', '01:30:00', 293, 0, 3.5),
+('SV1007', 'Jeddah (JED)', 'Dammam (DMM)', 'SV', 'Boeing 777-300ER', '2019-09-30', '21:00:00', '2019-09-30', '23:00:00', 365, 0, 4),
+('SV1005', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Boeing 777-300ER', '2019-09-30', '10:00:00', '2019-09-30', '11:30:00', 365, 0, 4),
+('SV1006', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-09-23', '10:00:00', '2019-09-23', '11:35:00', 365, 0, 4),
+('SV1004', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-09-23', '22:00:00', '2019-09-23', '23:40:00', 365, 0, 4),
+('SV1002', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-09-23', '09:00:00', '2019-09-23', '10:35:00', 365, 0, 4),
+('SV1003', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Boeing 777-300ER', '2019-09-30', '15:00:00', '2019-09-30', '16:30:00', 365, 0, 4),
+('XY1001', 'Jeddah (JED)', 'Riyadh (RUH)', 'XY', 'Boeing 777-300ER', '2019-09-30', '21:00:00', '2019-09-30', '22:35:00', 365, 0, 4),
+('XY1000', 'Riyadh (RUH)', 'Jeddah (JED)', 'XY', 'Boeing 777-300ER', '2019-09-23', '17:30:00', '2019-09-23', '19:15:00', 365, 0, 4),
+('SV1010', 'Madinah (MED)', 'Jeddah (JED)', 'SV', 'Airbus A330', '2019-09-23', '05:55:00', '2019-09-23', '06:55:00', 293, 0, 3.5),
+('SV1011', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Airbus A330', '2019-09-30', '07:00:00', '2019-09-30', '08:35:00', 293, 0, 3.5),
+('SV1012', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Airbus A330', '2019-09-23', '11:00:00', '2019-09-23', '12:35:00', 293, 0, 3.5),
+('XY1013', 'Riyadh (RUH)', 'Jeddah (JED)', 'XY', 'Airbus A330', '2019-09-23', '00:30:00', '2019-09-23', '02:15:00', 293, 0, 3.5);
 
 -- --------------------------------------------------------
 
