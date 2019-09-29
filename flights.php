@@ -11,15 +11,6 @@
   $passengers = $_POST['passengers'];
   $class = $_POST['class'];
 
-  include 'connectToDB.php';
-  $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination'";
-  $result=$con->query($sql);
-  if(!$row=mysqli_fetch_array($result)) {
-      $_SESSION['error'] = "Sorry we couldn't find any flight";
-      header("Location: index#search");
-      exit();
-  }
-
   function getDuration($a , $b) {
     $start = strtotime($a);
     $end = strtotime($b);
@@ -184,6 +175,13 @@
             <div class="col-12">
               <h3>Select your departure flight</h3>
             </div>';
+            
+            include 'connectToDB.php';
+            $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination'";
+            $result=$con->query($sql);
+            if(!$row=mysqli_fetch_array($result)) {
+              echo '<p>No return flights -.-!</p>';
+            }
             while($row=mysqli_fetch_array($result)){
               echo '
               <div class="col-lg-8 col-sm-12 text-center py-2">
