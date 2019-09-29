@@ -7,7 +7,7 @@ if(!isset($_POST['submit']))
     header('Location:dashboard.php?failMsg=All fields are required');
     exit();
 }
-else if(empty($_POST['from']) or empty($_POST['to']) or empty($_POST['carrier']) or empty($_POST['airplane']) or empty($_POST['departure_date']) or empty($_POST['departure_time']) or empty($_POST['arrival_date']) or empty($_POST['arrival_time']))
+else if(empty($_POST['from']) or empty($_POST['to']) or empty($_POST['carrier']) or empty($_POST['airplane']) or empty($_POST['departure_date']) or empty($_POST['departure_time']) or empty($_POST['arrival_date']) or empty($_POST['arrival_time']) or empty($_POST['price_factor']))
 {
     header('Location:dashboard.php?failMsg=All fields are required');
     exit();
@@ -30,6 +30,7 @@ else
     $departure_time = $_POST['departure_time'];
     $arrival_date = $_POST['arrival_date'];
     $arrival_time = $_POST['arrival_time'];
+    $price_factor = $_POST['price_factor'];
 
     if($airplane == "Boeing 777-300ER")
         $capacity = 365;
@@ -39,11 +40,15 @@ else
         $capacity = 300;
 
 
-$sql = " INSERT INTO `flights`(`flight_number`,`from`,`to`,`carrier`,`airplane`,`departure_date`,`departure_time`,`arrival_date`,`arrival_time`,`capacity`) VALUES ('$flight_number','$from','$to','$carrier','$airplane','$departure_date','$departure_time','$arrival_date','$arrival_time',$capacity); ";
+$sql = " INSERT INTO `flights`(`flight_number`,`from`,`to`,`carrier`,`airplane`,`departure_date`,`departure_time`,`arrival_date`,`arrival_time`,`capacity`,`reserved`,`price_factor`) VALUES ('$flight_number','$from','$to','$carrier','$airplane','$departure_date','$departure_time','$arrival_date','$arrival_time',$capacity,0,$price_factor); ";
+  if($con->query($sql)===TRUE){
+    header('Location:dashboard.php?successMsg=Added successfully');
+  }
+  else {
+    header('Location:dashboard.php?failMsg='.$con->error);
+  }
+//mysqli_query($con,$sql);
 
-mysqli_query($con,$sql);
-
-header('Location:dashboard.php?successMsg=Added successfully');
 
 }
 
