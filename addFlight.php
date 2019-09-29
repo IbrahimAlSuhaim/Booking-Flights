@@ -47,12 +47,11 @@ $sql = " INSERT INTO `flights`(`flight_number`,`from`,`to`,`carrier`,`airplane`,
   else {
     header('Location:dashboard.php?failMsg='.$con->error);
   }
-//mysqli_query($con,$sql);
 
 
 }
 
-//mysqli_close($con);
+mysqli_close($con);
 
 
 ?>
