@@ -275,7 +275,16 @@ $result_display = mysqli_query($con,$sql_display);
         </form>
       </div>
     </section>
-
+  
+      <section class="section pb-0 section-components mt-5">
+            <div>
+        <form class="" action="DeleteFlight.php" method="post">
+            <h3 class="h4 text-success font-weight-bold mb-4">Delete flight</h3>
+        <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" name="flight_number">
+            <button class="btn btn-1 btn-primary" type="submit" name="submit">Delete</button> 
+        </form>
+                </div>
+        </section>
 
 
     <section class="container">
