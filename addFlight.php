@@ -52,7 +52,7 @@ $sql = " INSERT INTO `flights`(`flight_number`,`from`,`to`,`carrier`,`airplane`,
 
 }
 
-mysqli_close($con);
+//mysqli_close($con);
 
 
 ?>
