@@ -204,9 +204,9 @@ $result_display = mysqli_query($con,$sql_display);
                     <label class="input-group-text" for="inputGroupSelect03">to</label>
                   </div>
                   <select class="custom-select" id="inputGroupSelect03" name="to">
-                    <option selected value="">Choose...</option>
-                    <option>Riyadh (RUH)</option>
-                    <option>Jeddah (JED)</option>
+                    <option selected value="" disabled>Choose...</option>
+                    <option value="Riyadh (RUH)">Riyadh (RUH)</option>
+                    <option value="Jeddah (JED)">Jeddah (JED)</option>
                   </select>
                 </div>
               </div>
@@ -216,7 +216,7 @@ $result_display = mysqli_query($con,$sql_display);
                     <label class="input-group-text" for="inputGroupSelect04">Airplane</label>
                   </div>
                   <select class="custom-select" id="inputGroupSelect04" name="airplane">
-                    <option selected value="">Choose...</option>
+                    <option selected value="" disabled>Choose...</option>
                     <option>Boeing 777-300ER</option>
                     <option>Airbus A330</option>
                   </select>
