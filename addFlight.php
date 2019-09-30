@@ -20,7 +20,7 @@ else if($_POST['from'] == $_POST['to'])
 else
 {
     //$flight_number = uniqid();
-    $flightsCount = $con->query("SELECT COUNT(*) FROM flights")->fetch_assoc()['COUNT(*)']+1000; //get number of flights in the DB
+    $flightsCount = $con->query("SELECT COUNT(*) FROM flights")->fetch_assoc()['COUNT(*)']+1000+rand(10,1000); //get number of flights in the DB
     $flight_number = $_POST['carrier'].''.$flightsCount;
     $from = $_POST['from'];
     $to = $_POST['to'];
