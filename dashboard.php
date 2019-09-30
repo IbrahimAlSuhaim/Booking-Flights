@@ -45,7 +45,7 @@ $result_display = mysqli_query($con,$sql_display);
 </head>
 
 <body class="">
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <nav class="navbar navbar-vertical fixed-left navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -169,169 +169,143 @@ $result_display = mysqli_query($con,$sql_display);
         <h3 class="h4 text-success font-weight-bold mb-4">Add flight</h3>
         <form class="" action="addFlight.php" method="post">
           <div class="row">
-            <div class="col-lg-6 col-sm-6">
+            <div class="col-4 my-2">
+              <label for="flight_number">Flight Number</label>
+              <input class="form-control" type="text" placeholder="XX0000" id="flight_number" name="flight_number" value="">
+              <small class="form-text text-muted">Leave blank if you want to generate random flight_number</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
               <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">from</label>
-                  </div>
-                  <select class="custom-select" id="inputGroupSelect01" name="from">
-                    <option selected value="">Choose...</option>
-                    <option>Riyadh (RUH)</option>
-                    <option>Jeddah (JED)</option>
-                  </select>
-                </div>
+                <label class="" for="from">From</label>
+                <select class="custom-select" id="from" name="from">
+                  <option selected value="" disabled>Choose...</option>
+                  <option>Riyadh (RUH)</option>
+                  <option>Jeddah (JED)</option>
+                </select>
               </div>
               <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect02">Carrier</label>
-                  </div>
-                  <select class="custom-select" id="inputGroupSelect02" name="carrier">
-                    <option selected value="" disabled>Choose...</option>
-                    <option value="SV">Saudia (SV)</option>
-                    <option value="XY">Flynas (XY)</option>
-                    <option value="6S">SaudiGulf (6S)</option>
-                    <option value="F3">Flyadeal (F3)</option>
-                  </select>
-                </div>
+                <label for="carrier">Carrier</label>
+                <select class="custom-select" id="carrier" name="carrier">
+                  <option selected value="" disabled>Choose...</option>
+                  <option value="SV">Saudia (SV)</option>
+                  <option value="XY">Flynas (XY)</option>
+                  <option value="6S">SaudiGulf (6S)</option>
+                  <option value="F3">Flyadeal (F3)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="departure_date">Departure Date</label>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="departure_date" name="departure_date">
+                <small class="form-text text-muted">Date Format: yyyy-mm-dd</small>
+              </div>
+              <div class="form-group">
+                <label for="arrival_date">Arrival Date</label>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="arrival_date" name="arrival_date">
+              </div>
+              <div class="form-group">
+                <label for="price_factor">Price Factor</label>
+                <input class="form-control" placeholder="Price factor" type="text" id="price_factor" name="price_factor" maxlength="3">
               </div>
             </div>
-            <div class="col-lg-6 col-sm-6">
+            <div class="col-md-6">
               <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect03">to</label>
-                  </div>
-                  <select class="custom-select" id="inputGroupSelect03" name="to">
-                    <option selected value="" disabled>Choose...</option>
-                    <option value="Riyadh (RUH)">Riyadh (RUH)</option>
-                    <option value="Jeddah (JED)">Jeddah (JED)</option>
-                  </select>
-                </div>
+                <label for="to">To</label>
+                <select class="custom-select" id="to" name="to">
+                  <option selected value="" disabled>Choose...</option>
+                  <option value="Riyadh (RUH)">Riyadh (RUH)</option>
+                  <option value="Jeddah (JED)">Jeddah (JED)</option>
+                </select>
               </div>
               <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect04">Airplane</label>
-                  </div>
-                  <select class="custom-select" id="inputGroupSelect04" name="airplane">
-                    <option selected value="" disabled>Choose...</option>
-                    <option>Boeing 777-300ER</option>
-                    <option>Airbus A330</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <div class="form-group">
-                <div class="input-group mb-4">
-                  <input class="form-control" placeholder="Departure date" type="text" name="departure_date">
-                  <div class="input-group-append">
-                    <span class="input-group-text"></span>
-                  </div>
-                </div>
+                <label for="airplane">Airplane</label>
+                <select class="custom-select" id="airplane" name="airplane">
+                  <option selected value="" disabled>Choose...</option>
+                  <option>Boeing 777-300ER</option>
+                  <option>Airbus A330</option>
+                </select>
               </div>
               <div class="form-group">
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"></span>
-                  </div>
-                  <input class="form-control" placeholder="Arrival date" type="text" name="arrival_date">
-                </div>
+                <label for="departure_time">Departure Time</label>
+                <input class="form-control" placeholder="hh:mm:ss" type="text" id="departure_time" name="departure_time">
+                <small class="form-text text-muted">Time Format: hh:mm:ss</small>
+              </div>
+              <div class="form-group">
+                <label for="arrival_time">Arrival Time</label>
+                <input class="form-control" placeholder="hh:mm:ss" type="text" id="arrival_time" name="arrival_time">
               </div>
             </div>
-            <div class="col-lg-6 col-sm-6">
-              <div class="form-group">
-                <div class="input-group mb-4">
-                  <input class="form-control" placeholder="Departure time" type="text" name="departure_time">
-                  <div class="input-group-append">
-                    <span class="input-group-text"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"></span>
-                  </div>
-                  <input class="form-control" placeholder="Arrival time" type="text" name="arrival_time">
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <div class="form-group">
-                <div class="input-group mb-4">
-                  <input class="form-control" placeholder="Price factor" type="number" name="price_factor" maxlength="3">
-                  <div class="input-group-append">
-                    <span class="input-group-text"></span>
-                  </div>
-                </div>
-              </div>
             <div class="col-lg-12 col-sm-12">
               <button class="btn btn-1 btn-primary" type="submit" name="submit">Add</button>
             </div>
           </div>
         </form>
+    </section>
+    <section class="container-fluid">
+      <div class="row my-3">
+        <div class="co-12">
+          <form class="" action="DeleteFlight.php" method="post">
+            <h3 class="h4 text-danger font-weight-bold mb-4">Delete flight</h3>
+            <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" name="flight_number">
+            <button class="btn btn-1 btn-danger mt-2" type="submit" name="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">flight_number</th>
+                <th scope="col">from</th>
+                <th scope="col">to</th>
+                <th scope="col">carrier</th>
+                <th scope="col">airplane</th>
+                <th scope="col">departure_date</th>
+                <th scope="col">departure_time</th>
+                <th scope="col">arrival_date</th>
+                <th scope="col">arrival_time</th>
+                <th scope="col">capacity</th>
+                <th scope="col">reserved</th>
+                <th scope="col">price factor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              if(mysqli_num_rows($result_display) > 0)
+              while($row = mysqli_fetch_assoc($result_display)) {
+                echo"
+                <tr>
+                <th>".$row['flight_number']."</th>
+                <td>".$row['from']."</td>
+                <td>".$row['to']."</td>
+                <td>".$row['carrier']."</td>
+                <td>".$row['airplane']."</td>
+                <td>".$row['departure_date']."</td>
+                <td>".$row['departure_time']."</td>
+                <td>".$row['arrival_date']."</td>
+                <td>".$row['arrival_time']."</td>
+                <td>".$row['capacity']."</td>
+                <td>".$row['reserved']."</td>
+                <td>".$row['price_factor']."</td>
+                </tr>
+                ";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
-      <section class="section pb-0 section-components mt-5">
-            <div>
-        <form class="" action="DeleteFlight.php" method="post">
-            <h3 class="h4 text-success font-weight-bold mb-4">Delete flight</h3>
-        <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" name="flight_number">
-            <button class="btn btn-1 btn-primary" type="submit" name="submit">Delete</button>
-        </form>
-                </div>
-        </section>
 
 
-    <section class="container">
 
-    <table class="table">
-        <thead>
-          <tr class="table-dark">
-            <th scope="col">flight_number</th>
-            <th scope="col">from</th>
-            <th scope="col">to</th>
-            <th scope="col">carrier</th>
-            <th scope="col">airplane</th>
-            <th scope="col">departure_date</th>
-            <th scope="col">departure_time</th>
-            <th scope="col">arrival_date</th>
-            <th scope="col">arrival_time</th>
-            <th scope="col">capacity</th>
-            <th scope="col">reserved</th>
-            <th scope="col">price factor</th>
-          </tr>
-        </thead>
-        <tbody>
-            <?php
-            if(mysqli_num_rows($result_display) > 0)
-                while($row = mysqli_fetch_assoc($result_display)) {
-                  echo"
-                  <tr>
-                    <th>".$row['flight_number']."</th>
-                    <td>".$row['from']."</td>
-                    <td>".$row['to']."</td>
-                    <td>".$row['carrier']."</td>
-                    <td>".$row['airplane']."</td>
-                    <td>".$row['departure_date']."</td>
-                    <td>".$row['departure_time']."</td>
-                    <td>".$row['arrival_date']."</td>
-                    <td>".$row['arrival_time']."</td>
-                    <td>".$row['capacity']."</td>
-                    <td>".$row['reserved']."</td>
-                    <td>".$row['price_factor']."</td>
-                  </tr>
-                  ";
-                }
-            ?>
-        </tbody>
-    </table>
 
-    </section>
+
+
+
 
 
 
