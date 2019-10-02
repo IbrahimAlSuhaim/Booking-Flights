@@ -38,9 +38,9 @@ $result_display = mysqli_query($con,$sql_display);
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link href="./assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
 </head>
 
@@ -245,11 +245,9 @@ $result_display = mysqli_query($con,$sql_display);
     <section class="container-fluid">
       <div class="row my-3">
         <div class="co-12">
-          <form class="" action="DeleteFlight.php" method="post">
             <h3 class="h4 text-danger font-weight-bold mb-4">Delete flight</h3>
-            <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" name="flight_number">
-            <button class="btn btn-1 btn-danger mt-2" type="submit" name="submit">Delete</button>
-          </form>
+            <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" id="delete_flight">
+            <button class="btn btn-1 btn-danger mt-2" onclick="confirm()">Delete</button>
         </div>
       </div>
       <div class="row">
@@ -298,23 +296,6 @@ $result_display = mysqli_query($con,$sql_display);
         </div>
       </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
   <!--   Core   -->
   <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
@@ -325,12 +306,52 @@ $result_display = mysqli_query($con,$sql_display);
   <!--   Argon JS   -->
   <script src="./assets/js/argon-dashboard.min.js?v=1.1.0"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <!-- jquery-confirm -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-dashboard-free"
-      });
+    function confirm() {
+      const flight_number = $('#delete_flight').val().trim();
+      if(flight_number!='') {
+        $.confirm({
+          icon: 'fa fa-question-circle',
+          title: 'Delete',
+          content: 'Delete '+flight_number+' flight?',
+          btnClass: 'btn-blue',
+          buttons: {
+            Proceed: {
+              btnClass: 'btn-red',
+              action: function () {
+                $.confirm({
+                  icon: 'fa fa-warning',
+                  title: 'This is critical action!',
+                  content: 'Do you really want to delete flight: '+flight_number+' ?',
+                  type: 'red',
+                  typeAnimated: true,
+                  buttons: {
+                    Yes: {
+                      text: 'Yes, Sure',
+                      btnClass: 'btn-red',
+                      action: function(){
+                        window.location="./deleteFlight.php?flight_number="+flight_number;
+                      }
+                    },
+                    No: function () {
+                      $('#delete_flight').val('');
+                      $.alert('Canceled!');
+                    }
+                  }
+                });
+              }
+            },
+            cancel: function () {
+              $('#delete_flight').val('');
+              $.alert('Canceled!');
+            }
+          }
+        });
+      }
+    }
+
   </script>
 </body>
 
