@@ -23,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Book flight tickets">
   <meta name="author" content="SWE444 Project">
-  <title>Flight Ticket Booking System</title>
+  <title>Book Flights System</title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -220,7 +220,7 @@
       <div class="row align-items-center justify-content-md-between">
         <div class="col-md-6">
           <div class="copyright">
-            &copy; 2019 Flight Ticket Booking.
+            &copy; 2019 Book Flights
           </div>
         </div>
       </div>
