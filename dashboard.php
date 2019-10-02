@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 
 <?php
-
+include './checkAdmin.php';
 include_once './connectToDB.php';
 
 $sql_display = " SELECT * FROM `flights` ";
