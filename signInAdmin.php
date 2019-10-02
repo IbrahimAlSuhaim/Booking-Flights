@@ -9,11 +9,9 @@ if($result=$con->query("SELECT * FROM admins WHERE username='$_POST[username]'")
     if(password_verify($_POST['password'],$row['password'])){
       if(isset($_POST['remember'])) {
         setcookie('username', $username, time() + (86400 * 30), "/"); // 86400 = 1 day
-        setcookie('first_name', 'Admin', time() + (86400 * 30), "/");
       }
       else {
         $_SESSION['username']=$username;
-        $_SESSION['first_name']='Admin';
       }
       header('Location:./dashboard');
     }
