@@ -15,9 +15,9 @@ include './connectToDB.php';
 //     exit();
 // }
 $del = $_GET['flight_number'];
-
-if(mysqli_query($con,"SELECT flight_number FROM `flights` WHERE `flight_number` = '$del'")){
-  $sql = " DELETE FROM `flights` WHERE `flight_number` = '$del'";
+$isThere = mysqli_query($con,"SELECT flight_number FROM `flights` WHERE `flight_number` = '$del'");
+if(mysqli_num_rows($isThere)>0){
+  $sql = "DELETE FROM `flights` WHERE `flight_number` = '$del'";
   if(mysqli_query($con,$sql)){
     header("Location:dashboard.php?successMsg='$del' has been deleted successfully");
     exit();
