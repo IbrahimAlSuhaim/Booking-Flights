@@ -1,18 +1,28 @@
 <?php
   session_start();
+  if(!isset($_POST['from'])) {
+    $_SESSION['error'] = 'some error occured, We sorry -.-!. Try again';
+    header('Location: ./index#search');
+    exit();
+  }
   $origin = $_POST['from'];
   $destination = $_POST['to'];
   $directionality = $_POST['directionality'];
   $departure_date = $_POST['departure_date'];
   $return_date = "";
-  if ($directionality == 'return') {
-    $return_date = $_POST['return_date'];
-  }
   $passengers = $_POST['passengers'];
   $class = $_POST['class'];
+  if ($directionality == 'return') {
+    $return_date = $_POST['return_date'];
+    // to be used in returnflights
+    $_SESSION['departure_flight'] = array("origin"=>$origin, "destination"=>$destination,
+                                      "directionality"=>$directionality, "departure_date"=>$departure_date,
+                                      "return_date"=>$return_date, "passengers"=>$passengers, "class"=>$class);
+    $next = 'return';
+  }
 
   include 'connectToDB.php';
-  $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination'";
+  $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination' AND reserved+'$passengers' <= capacity";
   $result=$con->query($sql);
   if($result->num_rows==0) {
       $_SESSION['error'] = "Sorry we couldn't find any flight";
@@ -73,6 +83,8 @@
   <link href="./assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
+  <!-- Confirm CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 </head>
 
 <body>
@@ -215,7 +227,7 @@
                         <p class="font-weight-bold">Price: '.($row['price_factor']*getPrice($class)).' SR</p>
                       </div>
                       <div class="col-lg-3 col-sm-12">
-                        <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
+                        <button onClick="handleChooseFlight(`'.$next.'`,`'.$row['flight_id'].'`)" class="btn btn-1 btn-warning" type="button">Select</button>
                       </div>
                     </div>
 
@@ -227,62 +239,8 @@
             }
           echo '</div>';
 
-          if ($directionality !== "oneWay"){
-            echo '
-            <div class="row justify-content-center row-grid mt-3">
-              <div class="col-12">
-                <h3>Select your return flight</h3>
-              </div>';
-
-            $sql="SELECT * FROM flights WHERE departure_date LIKE '$return_date' AND `to`='$origin' AND `from`='$destination'";
-            $result=$con->query($sql);
-            if($result->num_rows==0) {
-              echo '<p>No return flights -.-!</p>';
-            }
-
-            while($row=mysqli_fetch_array($result)) {
-              echo '
-              <div class="col-lg-8 col-sm-12 text-center py-2">
-                <div class="card card-lift shadow border-0">
-                  <div class="card-body py-3">
-                    <div class="row justify-content-center">
-                      <div class="col-4">
-                        <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
-                        <span class="d-block mb-1">'.$row['from'].'</span>
-                      </div>
-                      <div class="col-4">
-                        <small class="d-block mb-1 text-success">Direct</small>
-                        <small class="d-block mb-1">Duration: '.getDuration($row['departure_time'], $row['arrival_time']).'</small>
-                      </div>
-                      <div class="col-4">
-                        <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
-                        <span class="d-block mb-1">'.$row['to'].'</span>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row justify-content-between">
-                      <div class="col-lg-3 col-sm-4">
-                        <img src="./assets/img/carriers/'.$row['carrier'].'.png" alt=carrier: "'.$row['carrier'].'" title="'.$row['carrier'].'">
-                      </div>
-                      <div class="col-lg-3 col-sm-4">
-                        <p class="font-weight">Class: '.$class.'</p>
-                      </div>
-                      <div class="col-lg-3 col-sm-4">
-                        <p class="font-weight-bold">Price: '.($row['price_factor']*getPrice($class)).' SR</p>
-                      </div>
-                      <div class="col-lg-3 col-sm-12">
-                        <button class="btn btn-1 btn-warning" type="button" disabled>Select</button>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>';
-            }
-
             echo '
             </div>';
-          }
         echo '
         </div>';
      ?>
@@ -310,6 +268,9 @@
   <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.1.0"></script>
+  <!-- jquery-confirm -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="./assets/js/flights.js"></script>
 </body>
 
 </html>
