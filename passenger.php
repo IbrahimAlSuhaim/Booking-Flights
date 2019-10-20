@@ -254,7 +254,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 pt-1">
               <label for="gender">Gender:*</label>
               <div class="row">
                 <div class="col-md-2 mt-1">
