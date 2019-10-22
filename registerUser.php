@@ -16,7 +16,7 @@ if($con->query($sql)===TRUE){
 }
 else{
   $_SESSION['error'] = '<b>Faild:</b>'.$con->error;
-  //header('Location:./register');
+  // header('Location:./register');
 }
 
 
