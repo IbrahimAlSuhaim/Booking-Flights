@@ -12,14 +12,15 @@
   $return_date = "";
   $passengers = $_POST['passengers'];
   $class = $_POST['class'];
+  $next = 'd_passenger';
   if ($directionality == 'return') {
     $return_date = $_POST['return_date'];
-    // to be used in returnflights
-    $_SESSION['departure_flight'] = array("origin"=>$origin, "destination"=>$destination,
-                                      "directionality"=>$directionality, "departure_date"=>$departure_date,
-                                      "return_date"=>$return_date, "passengers"=>$passengers, "class"=>$class);
-    $next = 'return';
+    $next = 'f_return';
   }
+  // to be used in returnflights
+  $_SESSION['departure_flight'] = array("origin"=>$origin, "destination"=>$destination,
+    "directionality"=>$directionality, "departure_date"=>$departure_date,
+    "return_date"=>$return_date, "passengers"=>$passengers, "class"=>$class);
 
   include 'connectToDB.php';
   $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination' AND reserved+'$passengers' <= capacity";
@@ -30,26 +31,7 @@
       exit();
   }
 
-  function getDuration($a , $b) {
-    $start = strtotime($a);
-    $end = strtotime($b);
-    $time = (int)(($end - $start) / 60);
-
-    $hours = floor($time / 60);
-    $minutes = ($time % 60);
-    return $hours.'h '.$minutes.'m';
-  }
-  function getPrice($type) {
-    if($type==='Guest'){
-      return 105.40;
-    }
-    else if ($type==='Business'){
-      return 135.40;
-    }
-    else {
-      return 165.40;
-    }
-  }
+  include './assets/helper.php';
 ?>
 <!--
 

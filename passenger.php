@@ -5,39 +5,32 @@
     header('Location: ./index#search');
     exit();
   }
+  // to use it in seat page
   $departure_flight = $_SESSION['departure_flight'];
-  $departure_flight_id = $_GET['id'];
+
   $origin = $departure_flight['origin'];
   $destination = $departure_flight['destination'];
   $directionality = $departure_flight['directionality'];
   $departure_date = $departure_flight['departure_date'];
-  $return_date = $departure_flight['return_date'];
   $passengers = $departure_flight['passengers'];
   $class = $departure_flight['class'];
-  $next = 'passenger';
 
-  include 'connectToDB.php';
-
-  function getDuration($a , $b) {
-    $start = strtotime($a);
-    $end = strtotime($b);
-    $time = (int)(($end - $start) / 60);
-
-    $hours = floor($time / 60);
-    $minutes = ($time % 60);
-    return $hours.'h '.$minutes.'m';
+  if($directionality === 'oneWay') {
+    $departure_flight_id = $_GET['departure_id'];
+    $_SESSION['departure_flight'] = array("flight_id"=>$departure_flight_id) + $_SESSION['departure_flight'];// insert flight_id at the beginning of array $_SESSION['departure_flight']
   }
-  function getPrice($type) {
-    if($type==='Guest'){
-      return 105.40;
-    }
-    else if ($type==='Business'){
-      return 135.40;
-    }
-    else {
-      return 165.40;
-    }
+  else if ($directionality === 'return') {
+    $return_flight_id = $_GET['return_id'];
+    $_SESSION['return_flight_id'] = $return_flight_id;
+    $return_date = $departure_flight['return_date'];
+    $departure_flight = $_SESSION['departure_flight'];
   }
+  $_SESSION['departure_flight_id'] = $_SESSION['departure_flight']['flight_id'];
+
+  $next = 'seat';
+
+
+  include './assets/helper.php';
 ?>
 <!--
 
@@ -61,7 +54,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Book flight tickets">
   <meta name="author" content="SWE444 Project">
-  <title>SELECT YOUR FLIGHT(S)</title>
+  <title>passengers info</title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -174,7 +167,7 @@
             }
             echo '<div class="col-2">
               <span class="d-block mb-1">Class: <b>'.$class.'</b></span>
-              <span class="d-block mb-1">passengers: '.$passengers.'</span>
+              <span class="d-block mb-1">passengers: <strong id="passengersNum">'.$passengers.'</strong></span>
             </div>
           </div>
           <hr>';
@@ -182,131 +175,140 @@
     <section class="section pb-0 section-components mt-5">
       <div class="container mb-5">
         <h3 class="h4 font-weight-bold mb-4">Passengers information</h3>
-        <h5>Passenger 1</h5>
-        <form class="" action="" method="post">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="first_name">First Name:*</label>
-                <input class="form-control" placeholder="First name" type="text" id="first_name" name="first_name" required>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="middle_name">Middle Name</label>
-                <input class="form-control" placeholder="Middle name" type="text" id="middle_name" name="middle_name">
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="family_name">Family Name:*</label>
-                <input class="form-control" placeholder="Family name" type="text" id="family_name" name="family_name" required>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="nationality">Nationality:*</label>
-                <select class="form-control form-control-sm" id="nationality" name="nationality" required>
-                  <option selected value="" disabled>Nationality</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="document_type">Type of identification:*</label>
-                <select class="form-control form-control-sm" id="document_type" name="document_type" required>
-                  <option selected value="" disabled>Document Type</option>
-                  <option value="passport">Passport</option>
-                  <option value="national_id">Natinal identity card</option>
-                  <option value="iqama">Iqama</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="document_number">Document Number:*</label>
-                <input class="form-control" placeholder="Document Number" type="text" id="document_number" name="document_number" required>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <label>Date of Birth:*</label>
+        <hr>
+        <?php
+          for ($i=1; $i <= $passengers ; $i++) {
+            echo '
+            <h5>Passenger '.$i.'</h5>
+            <form class="" action="./seat" method="post">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <select class="form-control form-control-sm" id="birth_day" name="birth_day" required>
-                      <option selected value="" disabled>Day</option>
+                    <label for="first_name_'.$i.'">First Name:*</label>
+                    <input class="form-control" placeholder="First name" type="text" id="first_name_'.$i.'" name="first_name_'.$i.'" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="middle_name_'.$i.'">Middle Name</label>
+                    <input class="form-control" placeholder="Middle name" type="text" id="middle_name_'.$i.'" name="middle_name_'.$i.'">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="family_name_'.$i.'">Family Name:*</label>
+                    <input class="form-control" placeholder="Family name" type="text" id="family_name_'.$i.'" name="family_name_'.$i.'" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="nationality_'.$i.'">Nationality:*</label>
+                    <select class="form-control form-control-sm nationality" id="nationality_'.$i.'" name="nationality_'.$i.'" required>
+                      <option selected value="" disabled>Nationality</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <select class="form-control form-control-sm" id="birth_month" name="birth_month" required>
-                    <option selected value="" disabled>Month</option>
-                  </select>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="document_type_'.$i.'">Type of identification:*</label>
+                    <select class="form-control form-control-sm" id="document_type_'.$i.'" name="document_type_'.$i.'" required>
+                      <option selected value="" disabled>Document Type</option>
+                      <option value="passport">Passport</option>
+                      <option id="national_id_'.$i.'" value="national_id">National identity card</option>
+                      <option value="iqama">Iqama</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="col-md-4">
-                  <select class="form-control form-control-sm" id="birth_year" name="birth_year" required>
-                    <option selected value="" disabled>Year</option>
-                  </select>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="document_number_'.$i.'">Document Number:*</label>
+                    <input class="form-control" placeholder="Document Number" type="text" id="document_number_'.$i.'" name="document_number_'.$i.'" required>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 pt-1">
-              <label for="gender">Gender:*</label>
               <div class="row">
-                <div class="col-md-2 mt-1">
-                  <div class="custom-control custom-radio ml-2" id="gender">
-                    <input type="radio" class="custom-control-input" id="male" name="gender" value="male" required>
-                    <label class="custom-control-label" for="male">Male</label>
+                <div class="col-md-5">
+                  <label>Date of Birth:*</label>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select class="form-control form-control-sm" id="birth_day_'.$i.'" name="birth_day_'.$i.'" required>
+                          <option selected value="" disabled>Day</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <select class="form-control form-control-sm" id="birth_month_'.$i.'" name="birth_month_'.$i.'" required>
+                        <option selected value="" disabled>Month</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <select class="form-control form-control-sm" id="birth_year_'.$i.'" name="birth_year_'.$i.'" required>
+                        <option selected value="" disabled>Year</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-2 mt-1">
-                  <div class="custom-control custom-radio ml-2" id="gender">
-                    <input type="radio" class="custom-control-input" id="female" name="gender" value="female" required>
-                    <label class="custom-control-label" for="female">Female</label>
+                <div class="col-md-6 pt-1">
+                  <label>Gender:*</label>
+                  <div class="row">
+                    <div class="col-md-2 mt-1">
+                      <div class="custom-control custom-radio ml-2">
+                        <input type="radio" class="custom-control-input" id="male_'.$i.'" name="gender_'.$i.'" value="male" required>
+                        <label class="custom-control-label" for="male_'.$i.'">Male</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2 mt-1">
+                      <div class="custom-control custom-radio ml-2">
+                        <input type="radio" class="custom-control-input" id="female_'.$i.'" name="gender_'.$i.'" value="female" required>
+                        <label class="custom-control-label" for="female_'.$i.'">Female</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <h6>Contact information</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="country_code">Country Code:*</label>
-                <select class="form-control form-control-sm" id="country_code" name="country_code" required>
-                  <option selected value="" disabled>Country code</option>
-                </select>
+              <div class="row">
+                <div class="col-12">
+                  <h6>Contact information</h6>
+                </div>
               </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="number">Number:*</label>
-                <input class="form-control" placeholder="566334477" type="text" id="number" name="number" required>
-                <small class="text-muted">without a leading zero for example: 566334477</small>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="country_code_'.$i.'">Country Code:*</label>
+                    <select class="form-control form-control-sm" id="country_code_'.$i.'" name="country_code_'.$i.'" required>
+                      <option selected value="" disabled>Country code</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="number_'.$i.'">Number:*</label>
+                    <input class="form-control" placeholder="566334477" type="text" id="number_'.$i.'" name="number_'.$i.'" required>
+                    <small class="text-muted">without a leading zero for example: 566334477</small>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="email_'.$i.'">Email:*</label>
+                    <input class="form-control" placeholder="email" type="email" id="email_'.$i.'" name="email_'.$i.'" required>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="number">Email:*</label>
-                <input class="form-control" placeholder="email" type="email" id="email" name="email" required>
+              <hr>
+            ';
+          }
+          echo '
+              <div class="row justify-content-end">
+                <div class="col-md-1">
+                  <button class="btn btn-1 btn-primary" type="submit" name="submit">Go!</button>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="row justify-content-end">
-            <div class="col-md-1">
-              <button class="btn btn-1 btn-primary" type="submit" name="submit">Go!</button>
-            </div>
-          </div>
-        </div>
-        </form>
+            </form>';
+         ?>
+
       </div>
     </section>
   </div> <!--end of container-->

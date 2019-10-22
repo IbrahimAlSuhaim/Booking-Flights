@@ -1,12 +1,14 @@
 <?php
   session_start();
-  if(!isset($_SESSION['departure_flight'])) {
+  if(!isset($_SESSION['departure_flight']) || !isset($_GET['departure_id'])) {
     $_SESSION['error'] = 'some error occured, We sorry -.-!. Try again';
     header('Location: ./index#search');
     exit();
   }
   $departure_flight = $_SESSION['departure_flight'];
-  $departure_flight_id = $_GET['id'];
+  $departure_flight_id = $_GET['departure_id'];
+  $_SESSION['departure_flight'] = array("flight_id"=>$departure_flight_id) + $_SESSION['departure_flight'];// insert flight_id at the beginning of array $_SESSION['departure_flight']
+
   $origin = $departure_flight['origin'];
   $destination = $departure_flight['destination'];
   $directionality = $departure_flight['directionality'];
@@ -14,30 +16,10 @@
   $return_date = $departure_flight['return_date'];
   $passengers = $departure_flight['passengers'];
   $class = $departure_flight['class'];
-  $next = 'passenger';
+  $next = 'r_passenger';
 
   include 'connectToDB.php';
-
-  function getDuration($a , $b) {
-    $start = strtotime($a);
-    $end = strtotime($b);
-    $time = (int)(($end - $start) / 60);
-
-    $hours = floor($time / 60);
-    $minutes = ($time % 60);
-    return $hours.'h '.$minutes.'m';
-  }
-  function getPrice($type) {
-    if($type==='Guest'){
-      return 105.40;
-    }
-    else if ($type==='Business'){
-      return 135.40;
-    }
-    else {
-      return 165.40;
-    }
-  }
+  include './assets/helper.php';
 ?>
 <!--
 
