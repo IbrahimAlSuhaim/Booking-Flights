@@ -52,7 +52,7 @@ this is for confirmation email
     $mail->isHTML(true);
     $mail->setFrom("ksu444project@gmail.com",'Admin');
     $mail->addAddress($email);
-    $mail->Subject = 'Thank you oos';
+    $mail->Subject = 'Thank you';
     $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
     
     if($mail->send())
