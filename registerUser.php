@@ -16,7 +16,7 @@ if($con->query($sql)===TRUE){
 }
 else{
   $_SESSION['error'] = '<b>Faild:</b>'.$con->error;
-  // header('Location:./register');
+  //header('Location:./register');
 }
 
 
@@ -55,8 +55,8 @@ this is for confirmation email
     $mail->Subject = 'Thank you';
     $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
 
-    // if($mail->send())
-    //     echo "done";
-    // else
+    if($mail->send())
+        echo "done";
+    else
         echo $mail->ErrorInfo;
     ?>
