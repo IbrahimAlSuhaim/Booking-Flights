@@ -137,20 +137,20 @@
               <div class="row">
                 <div class="col-3">
                   <div class="custom-control custom-radio mb-3">
-                    <input name="directionality" class="custom-control-input" id="return" value="return" checked type="radio">
+                    <input name="directionality" class="custom-control-input" id="return" value="return" type="radio" required>
                     <label class="custom-control-label" for="return"><span>Return</span></label>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="custom-control custom-radio mb-3">
-                    <input name="directionality" class="custom-control-input" id="oneWay" value="oneWay" type="radio">
+                    <input name="directionality" class="custom-control-input" id="oneWay" value="oneWay" type="radio" required>
                     <label class="custom-control-label" for="oneWay"><span>One Way</span></label>
                   </div>
                 </div>
               </div>
               <div class="row" id="date">
-                <div class="col-md-12 mt-4 mt-md-0">
-                  <small class="d-block text-uppercase font-weight-bold mb-3" id="datepicker_label">Departure - Return</small>
+                <div class="col-md-12 mt-4 mt-md-0" id="departure_return">
+                  <small class="d-block text-uppercase font-weight-bold mb-3">Departure - Return</small>
                   <div class="input-daterange datepicker row align-items-center" data-date-format="yyyy-mm-dd">
                     <div class="col">
                       <div class="form-group focused">
@@ -158,19 +158,30 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" id="departure_date" placeholder="Departure date" type="text" name="departure_date"  required>
+                          <input class="form-control" placeholder="Departure date" type="text" id="departure_return_departure" name="departure_date">
                         </div>
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-group focused">
-                        <div class="input-group" id="return_picker">
+                        <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input class="form-control" id="return_date" placeholder="Return date" type="text" name="return_date" required>
+                          <input class="form-control" placeholder="Return date" type="text" id="departure_return_return" name="return_date">
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mt-4 mt-md-0" id="departure">
+                  <small class="d-block text-uppercase font-weight-bold mb-3">Departure</small>
+                  <div class="form-group focused">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" data-date-format="yyyy-mm-dd" placeholder="Select date" type="text" id="departure_departure">
                     </div>
                   </div>
                 </div>
