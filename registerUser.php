@@ -47,7 +47,7 @@ this is for confirmation email
     $mail->Username = "ksu444project@gmail.com";
     $mail->Password = "444project";
     $mail->Port = 465;
-    $mail->SMTPSecure="tls";
+    $mail->SMTPSecure="ssl";
 
     $mail->isHTML(true);
     $mail->setFrom("ksu444project@gmail.com",'Admin');
@@ -55,8 +55,8 @@ this is for confirmation email
     $mail->Subject = 'Thank you';
     $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
 
-    if($mail->send())
-        echo "done";
-    else
+    // if($mail->send())
+    //     echo "done";
+    // else
         echo $mail->ErrorInfo;
     ?>
