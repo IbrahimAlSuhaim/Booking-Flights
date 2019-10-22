@@ -11,7 +11,7 @@ $sql= "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`) VALUE
 
 
 if($con->query($sql)===TRUE){
-  $_SESSION['message'] = 'Thank you for registration';
+  $_SESSION['message'] = 'Thank you For registration';
   header('Location:./register');
 }
 else{
