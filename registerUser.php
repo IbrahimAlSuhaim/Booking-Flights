@@ -47,7 +47,7 @@ this is for confirmation email
     $mail->Username = "ksu444project@gmail.com";
     $mail->Password = "444project";
     $mail->Port = 465;
-    $mail->SMTPSecure="ssl";
+    $mail->SMTPSecure="tls";
 
     $mail->isHTML(true);
     $mail->setFrom("ksu444project@gmail.com",'Admin');
