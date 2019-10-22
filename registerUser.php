@@ -30,6 +30,12 @@ this is for confirmation email
 <?php
 
     use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    // Load Composer's autoloader
+    require 'vendor/autoload.php';
 
     require_once "PHPMailer\PHPMailer.php";
     require_once "PHPMailer\SMTP.php";
