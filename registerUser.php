@@ -12,25 +12,25 @@ $sql= "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`) VALUE
 
 if($con->query($sql)===TRUE){
   $_SESSION['message'] = 'Thank you For registration';
-  header('Location:./register');
+  //header('Location:./register');
 }
 else{
   $_SESSION['error'] = '<b>Faild:</b>'.$con->error;
-  header('Location:./register');
+  //header('Location:./register');
 }
 
 
 $con->close();
  ?>
-<!-- 
+<!--
 
 this is for confirmation email
 -->
 
 <?php
-    
+
     use PHPMailer\PHPMailer\PHPMailer;
-    
+
     require_once "PHPMailer\PHPMailer.php";
     require_once "PHPMailer\SMTP.php";
     require_once "PHPMailer\Exception.php";
@@ -40,7 +40,7 @@ this is for confirmation email
     $email=$_POST['email'];
     $tot = 'hii';
     $mail = new PHPMailer();
-    
+
     $mail->isSMTP();
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = true;
@@ -48,13 +48,13 @@ this is for confirmation email
     $mail->Password = "444project";
     $mail->Port = 465;
     $mail->SMTPSecure="ssl";
-    
+
     $mail->isHTML(true);
     $mail->setFrom("ksu444project@gmail.com",'Admin');
     $mail->addAddress($email);
     $mail->Subject = 'Thank you';
     $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
-    
+
     if($mail->send())
         echo "done";
     else
