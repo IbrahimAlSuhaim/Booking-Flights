@@ -20,7 +20,7 @@ $sql= "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`) VALUE
 
 
 if($con->query($sql)===TRUE){
-  $_SESSION['message'] = 'Thank you For registration';
+  $_SESSION['message'] = 'Thank you For registration'.$first_name;
   $emailTo=$_POST['email'];
 
 
@@ -28,9 +28,9 @@ if($con->query($sql)===TRUE){
   $email->setFrom("No-replay@bookflights.com", "Bookflights Team");
   $email->setSubject("Thank you for registration");
   $email->addTo($emailTo, $first_name);
-  $email->addContent("text/plain", "Thank you for registering in book-flights");
+  $email->addContent("text/plain", "Thank you for registering in book-flights, $first_name");
   $email->addContent(
-      "text/html", "<strong>Thank you for registering in book-flights</strong>"
+      "text/html", "<strong>Thank you for registering in book-flights, $first_name</strong>"
   );
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
