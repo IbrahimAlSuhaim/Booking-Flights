@@ -96,7 +96,7 @@
                 <?php
                   if(isset($_SESSION['error'])){
                     echo '
-                      <div class="col-12">
+                      <div class="col-12 mb-3">
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                           <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
                           <span class="alert-inner--text">'.$_SESSION['error'].'</span>
