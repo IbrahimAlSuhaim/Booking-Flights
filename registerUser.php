@@ -33,10 +33,13 @@ this is for confirmation email
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
+    // Load Composer's autoloader
+    require 'vendor/autoload.php';
 
-    require_once "PHPMailer\PHPMailer.php";
-    require_once "PHPMailer\SMTP.php";
-    require_once "PHPMailer\Exception.php";
+
+    // require_once "PHPMailer\PHPMailer.php";
+    // require_once "PHPMailer\SMTP.php";
+    // require_once "PHPMailer\Exception.php";
 
     $first_name=$_POST['first_name'];
     $last_name=$_POST['last_name'];
