@@ -28,9 +28,9 @@ if($con->query($sql)===TRUE){
   $email->setFrom("No-replay@bookflights.com", "Bookflights Team");
   $email->setSubject("Thank you for registration");
   $email->addTo($emailTo, $first_name);
-  $email->addContent("text/plain", "Thank you for registering in book-flights, $first_name");
+  $email->addContent("text/plain", "Thank you for registering in book-flights, ".$first_name);
   $email->addContent(
-      "text/html", "<strong>Thank you for registering in book-flights, $first_name</strong>"
+      "text/html", "<strong>Thank you for registering in book-flights, ".$first_name."</strong>"
   );
   $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
   try {
