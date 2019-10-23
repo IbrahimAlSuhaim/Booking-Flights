@@ -1,5 +1,13 @@
 <?php
 session_start();
+include './preventUnregisteredUsers.php';
+if(!isset($_SESSION['departure_flight'])) {
+  include './preventLoggedUsers.php'; //redirect user to index when update confirmation page after booking flight
+}
+unset($_SESSION['departure_flight']);
+unset($_SESSION['departure_flight_id']);
+unset($_SESSION['return_flight_id']);
+unset($_SESSION['list_passengers']);
  ?>
 <!--
 

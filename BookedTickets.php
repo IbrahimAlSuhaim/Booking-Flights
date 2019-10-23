@@ -1,6 +1,6 @@
 <?php
   session_start();
-
+include './preventUnregisteredUsers.php';
 $id = $_SESSION['user_id'];
   include_once 'connectToDB.php';
   include_once 'assets/helper.php';
