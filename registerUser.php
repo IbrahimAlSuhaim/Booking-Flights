@@ -29,7 +29,7 @@ this is for confirmation email
 
 <?php
 
-    use PHPMailer\PHPMailer\PHPMailer;
+    // use PHPMailer\PHPMailer\PHPMailer;
     // use PHPMailer\PHPMailer\SMTP;
     // use PHPMailer\PHPMailer\Exception;
 
@@ -43,28 +43,28 @@ this is for confirmation email
 
     $first_name=$_POST['first_name'];
     $last_name=$_POST['last_name'];
-    $email=$_POST['email'];
+    $emailTo=$_POST['email'];
     $tot = 'hii';
-    $mail = new PHPMailer();
-
-    $mail->isSMTP();
-    $mail->Host = "smtp.gmail.com";
-    $mail->SMTPAuth = true;
-    $mail->Username = "ksu444project@gmail.com";
-    $mail->Password = "444project";
-    $mail->Port = 465;
-    $mail->SMTPSecure="tls";
-
-    $mail->isHTML(true);
-    $mail->setFrom("ksu444project@gmail.com",'Admin');
-    $mail->addAddress($email);
-    $mail->Subject = 'Thank you';
-    $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
-
-    if($mail->send())
-        echo "done";
-    else
-        echo $mail->ErrorInfo;
+    // $mail = new PHPMailer();
+    //
+    // $mail->isSMTP();
+    // $mail->Host = "smtp.gmail.com";
+    // $mail->SMTPAuth = true;
+    // $mail->Username = "ksu444project@gmail.com";
+    // $mail->Password = "444project";
+    // $mail->Port = 465;
+    // $mail->SMTPSecure="tls";
+    //
+    // $mail->isHTML(true);
+    // $mail->setFrom("ksu444project@gmail.com",'Admin');
+    // $mail->addAddress($email);
+    // $mail->Subject = 'Thank you';
+    // $mail->Body = 'Thank you for registering in book-flights.herokuapp.com';
+    //
+    // if($mail->send())
+    //     echo "done";
+    // else
+    //     echo $mail->ErrorInfo;
     ?>
 
     <?php
@@ -79,7 +79,7 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("ksu444project@gmail.com", "Admin");
 $email->setSubject("Sending with SendGrid is Fun");
-$email->addTo($email, "Example User");
+$email->addTo($emailTo, "Example User");
 $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
 $email->addContent(
     "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
