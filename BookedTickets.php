@@ -141,6 +141,7 @@ $id = $_SESSION['user_id'];
                   <div class="col-4">
                     <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
                     <span class="d-block mb-1">'.$row['from'].'</span>
+                    <span class="d-block mb-1 text-muted">'.$row['departure_date'].'</span>
                   </div>
                   <div class="col-4">
                     <small class="d-block mb-1 text-success">Direct</small>
@@ -149,6 +150,7 @@ $id = $_SESSION['user_id'];
                   <div class="col-4">
                     <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
                     <span class="d-block mb-1">'.$row['to'].'</span>
+                    <span class="d-block text-muted mb-1">'.$row['arrival_date'].'</span>
                   </div>
                 </div>
                 <hr class="py-0 mt-0 mb-0">
