@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2019 at 09:39 PM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Generation Time: Oct 23, 2019 at 06:03 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,6 +47,35 @@ INSERT INTO `admins` (`admin_id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `airports`
+--
+
+DROP TABLE IF EXISTS `airports`;
+CREATE TABLE IF NOT EXISTS `airports` (
+  `code` varchar(3) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `airports`
+--
+
+INSERT INTO `airports` (`code`, `name`) VALUES
+('MED', 'Madinah'),
+('AHB', 'Abha'),
+('BHH', 'Bisha'),
+('GIZ', 'Jazan'),
+('ABT', 'Al-Baha'),
+('ELQ', 'Gassim'),
+('DMM', 'Dammam'),
+('JED', 'Jeddah'),
+('RUH', 'Riyadh'),
+('TUU', 'Tabuk');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `booked_tickets`
 --
 
@@ -63,7 +92,18 @@ CREATE TABLE IF NOT EXISTS `booked_tickets` (
   KEY `FK_flight` (`flight_id`),
   KEY `FK_user` (`user_id`),
   KEY `FK_passenger` (`passenger_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `booked_tickets`
+--
+
+INSERT INTO `booked_tickets` (`ticket_id`, `user_id`, `flight_id`, `passenger_id`, `class`, `seat`, `meal`) VALUES
+(18, 14, 24, 19, 'Guest', '', ''),
+(19, 14, 24, 20, 'Guest', '', ''),
+(20, 15, 23, 21, 'Guest', '', ''),
+(21, 15, 25, 19, 'Guest', '', ''),
+(22, 14, 30, 22, 'Guest', '', '');
 
 -- --------------------------------------------------------
 
@@ -97,14 +137,14 @@ CREATE TABLE IF NOT EXISTS `flights` (
 INSERT INTO `flights` (`flight_id`, `flight_number`, `from`, `to`, `carrier`, `airplane`, `departure_date`, `departure_time`, `arrival_date`, `arrival_time`, `capacity`, `reserved`, `price_factor`) VALUES
 (21, 'SV1001', 'Riyadh (RUH)', 'Madinah (MED)', 'SV', 'Airbus A330', '2019-12-10', '01:10:00', '2019-12-10', '02:45:00', 293, 0, 3),
 (22, 'SV1002', 'Madinah (MED)', 'Jeddah (JED)', 'SV', 'Airbus A330', '2019-12-10', '05:55:00', '2019-12-10', '06:55:00', 293, 0, 3),
-(23, 'SV1003', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Airbus A330', '2019-12-17', '07:00:00', '2019-12-17', '08:35:00', 293, 0, 3),
-(24, 'SV1004', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Airbus A330', '2019-12-10', '11:00:00', '2019-12-10', '12:35:00', 293, 0, 3),
-(25, 'XY1005', 'Riyadh (RUH)', 'Jeddah (JED)', 'XY', 'Airbus A330', '2019-12-10', '00:30:00', '2019-12-10', '02:15:00', 293, 0, 3),
+(23, 'SV1003', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Airbus A330', '2019-12-17', '07:00:00', '2019-12-17', '08:35:00', 293, 1, 3),
+(24, 'SV1004', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Airbus A330', '2019-12-10', '11:00:00', '2019-12-10', '12:35:00', 293, 2, 3),
+(25, 'XY1005', 'Riyadh (RUH)', 'Jeddah (JED)', 'XY', 'Airbus A330', '2019-12-10', '00:30:00', '2019-12-10', '02:15:00', 293, 1, 3),
 (26, 'XY1006', 'Riyadh (RUH)', 'Jeddah (JED)', 'XY', 'Boeing 777-300ER', '2019-12-10', '17:30:00', '2019-12-10', '19:15:00', 365, 0, 3.5),
 (27, 'XY1007', 'Jeddah (JED)', 'Riyadh (RUH)', 'XY', 'Boeing 777-300ER', '2019-12-17', '21:00:00', '2019-12-17', '22:35:00', 365, 0, 3.5),
 (28, 'SV1008', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-12-10', '09:00:00', '2019-12-10', '10:35:00', 365, 0, 3.5),
 (29, 'SV1009', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Boeing 777-300ER', '2019-12-17', '15:00:00', '2019-12-17', '16:30:00', 365, 0, 3.5),
-(30, 'SV1010', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-12-10', '22:00:00', '2019-12-10', '23:40:00', 365, 0, 3.5),
+(30, 'SV1010', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-12-10', '22:00:00', '2019-12-10', '23:40:00', 365, 1, 3.5),
 (31, 'SV1011', 'Jeddah (JED)', 'Riyadh (RUH)', 'SV', 'Boeing 777-300ER', '2019-12-17', '10:00:00', '2019-12-17', '11:30:00', 365, 0, 3.5),
 (32, 'SV1012', 'Riyadh (RUH)', 'Jeddah (JED)', 'SV', 'Boeing 777-300ER', '2019-12-10', '10:00:00', '2019-12-10', '11:35:00', 365, 0, 3.5),
 (33, 'SV1013', 'Jeddah (JED)', 'Dammam (DMM)', 'SV', 'Boeing 777-300ER', '2019-12-17', '21:00:00', '2019-12-17', '23:00:00', 365, 0, 3.5);
@@ -171,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `passengers` (
   `number` varchar(20) NOT NULL,
   `email` varchar(320) NOT NULL,
   PRIMARY KEY (`passenger_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `passengers`
@@ -179,7 +219,11 @@ CREATE TABLE IF NOT EXISTS `passengers` (
 
 INSERT INTO `passengers` (`passenger_id`, `first_name`, `middle_name`, `family_name`, `nationality`, `document_type`, `document_number`, `birth_date`, `gender`, `number`, `email`) VALUES
 (16, 'Abdul-Wakil', 'Jaun', 'Tahan', 'American', 'passport', '116647397', '1956-01-04', 'male', '+13347537200', 'Abdul-WakilJaunTahan@armyspy.com'),
-(17, 'Afya', 'Dunya', 'Amari', 'Egyptian', 'passport', '269959264', '1975-07-23', 'male', '+14844161405', 'AfyaDunyaAmari@armyspy.com');
+(17, 'Afya', 'Dunya', 'Amari', 'Egyptian', 'passport', '269959264', '1975-07-23', 'male', '+14844161405', 'AfyaDunyaAmari@armyspy.com'),
+(19, 'aaa', 'bbb', 'ccc', 'Afghan', 'iqama', '123321', '1900-01-01', 'male', '+935555555', 'jjj@jjj.com'),
+(20, 'AAA', 'BBB', 'CCC', 'Afghan', 'passport', '123321456', '1900-01-01', 'female', '+93555576575', 'iii@uuu.com'),
+(21, 'h', 'b', 'o', 'Afghan', 'passport', '1111111', '1916-08-18', 'male', '+1 2465555555', 'ffa@dda.com'),
+(22, 'ttt', 'ttt', 'ttt', 'Guyanese', 'passport', '123321', '1922-12-19', 'male', '+2545555555', 'ttt@ttt.com');
 
 -- --------------------------------------------------------
 
@@ -196,14 +240,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(30) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `first_name`, `last_name`) VALUES
-(14, 'Ibrahim@ksu.com', '$2y$10$GDoIc8yujfKuwi1Ar7Gt9OwwCwp20CE.64.kRnDvUxRfFt6h5e4Ka', 'Ibrahim', 'AlSuhaim');
+(14, 'Ibrahim@ksu.com', '$2y$10$GDoIc8yujfKuwi1Ar7Gt9OwwCwp20CE.64.kRnDvUxRfFt6h5e4Ka', 'Ibrahim', 'AlSuhaim'),
+(15, 'hamad@ksu.com', '$2y$10$H3xeiJbBksXjqVzewaUTjuV65Y7E/vy2R02CCWWR.xNM2YzfV8qOC', 'hamad', 'bader');
 
 --
 -- Constraints for dumped tables
