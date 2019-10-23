@@ -21,9 +21,11 @@ $class = $_SESSION['departure_flight']['class'];
 
 if(isset($_COOKIE['user_id'])) {
   $user_id = $_COOKIE['user_id'];
+  $user_first_name = $_COOKIE['first_name'];
 }
 else if(isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
+  $user_first_name = $_SESSION['first_name'];
 }
 else {
   $_SESSION['next'] = './bookflight';
@@ -81,10 +83,10 @@ $emailTo=$row['email'];
 $email = new \SendGrid\Mail\Mail();
 $email->setFrom("No-replay@bookflights.com", "Bookflights Team");
 $email->setSubject("Thank you for booking");
-$email->addTo($emailTo, $first_name);
-$email->addContent("text/plain", "Thank you for booking, ".$first_name."Your flight booking is confirmed");
+$email->addTo($emailTo, $user_first_name);
+$email->addContent("text/plain", "Thank you for booking, ".$user_first_name."Your flight booking is confirmed");
 $email->addContent(
-    "text/html", "<p>Thank you for booking, ".$first_name."</p><br><strong>Your flight booking is confirmed</strong>"
+    "text/html", "<p>Thank you for booking, ".$user_first_name."</p><br><strong>Your flight booking is confirmed</strong>"
 );
 $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 try {
