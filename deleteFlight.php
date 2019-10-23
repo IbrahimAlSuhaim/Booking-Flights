@@ -14,12 +14,12 @@ include './connectToDB.php';
 //     header('Location:dashboard.php?failMsg=All fields are required');
 //     exit();
 // }
-$del = $_GET['flight_number'];
-$isThere = mysqli_query($con,"SELECT flight_number FROM `flights` WHERE `flight_number` = '$del'");
+$del = $_GET['flight_id'];
+$isThere = mysqli_query($con,"SELECT flight_number FROM `flights` WHERE `flight_id` = '$del'");
 if(mysqli_num_rows($isThere)>0){
-  $sql = "DELETE FROM `flights` WHERE `flight_number` = '$del'";
+  $sql = "DELETE FROM `flights` WHERE `flight_id` = '$del'";
   if(mysqli_query($con,$sql)){
-    header("Location:dashboard.php?successMsg='$del' has been deleted successfully");
+    header("Location:dashboard.php?successMsg=flight_id='$del' has been deleted successfully");
     exit();
   }
   else {
@@ -28,7 +28,7 @@ if(mysqli_num_rows($isThere)>0){
   }
 }
 else {
-  header("Location:dashboard.php?failMsg='$del' not in the database");
+  header("Location:dashboard.php?failMsg=flight_id='$del' not in the database");
   exit();
 }
 

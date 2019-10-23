@@ -246,7 +246,7 @@ $result_display = mysqli_query($con,$sql_display);
       <div class="row my-3">
         <div class="co-12">
             <h3 class="h4 text-danger font-weight-bold mb-4">Delete flight</h3>
-            <input class="form-control" placeholder="FLIGHT_NUMBER" type="text" id="delete_flight">
+            <input class="form-control" placeholder="FLIGHT_ID" type="text" id="delete_flight">
             <button class="btn btn-1 btn-danger mt-2" onclick="confirm()">Delete</button>
         </div>
       </div>
@@ -255,6 +255,7 @@ $result_display = mysqli_query($con,$sql_display);
           <table class="table">
             <thead>
               <tr class="table-dark">
+                <th scope="col">flight_id</th>
                 <th scope="col">flight_number</th>
                 <th scope="col">from</th>
                 <th scope="col">to</th>
@@ -275,6 +276,7 @@ $result_display = mysqli_query($con,$sql_display);
               while($row = mysqli_fetch_assoc($result_display)) {
                 echo"
                 <tr>
+                <th>".$row['flight_id']."</th>
                 <th>".$row['flight_number']."</th>
                 <td>".$row['from']."</td>
                 <td>".$row['to']."</td>
@@ -310,12 +312,12 @@ $result_display = mysqli_query($con,$sql_display);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script>
     function confirm() {
-      const flight_number = $('#delete_flight').val().trim();
-      if(flight_number!='') {
+      const flight_id = $('#delete_flight').val().trim();
+      if(flight_id!='') {
         $.confirm({
           icon: 'fa fa-question-circle',
           title: 'Delete',
-          content: 'Delete '+flight_number+' flight?',
+          content: 'Delete flight_id='+flight_id+' ?',
           btnClass: 'btn-blue',
           buttons: {
             Proceed: {
@@ -324,7 +326,7 @@ $result_display = mysqli_query($con,$sql_display);
                 $.confirm({
                   icon: 'fa fa-warning',
                   title: 'This is critical action!',
-                  content: 'Do you really want to delete flight: '+flight_number+' ?',
+                  content: 'Do you really want to delete flight id: '+flight_id+' ?',
                   type: 'red',
                   typeAnimated: true,
                   buttons: {
@@ -332,7 +334,7 @@ $result_display = mysqli_query($con,$sql_display);
                       text: 'Yes, Sure',
                       btnClass: 'btn-red',
                       action: function(){
-                        window.location="./deleteFlight.php?flight_number="+flight_number;
+                        window.location="./deleteFlight.php?flight_id="+flight_id;
                       }
                     },
                     No: function () {
