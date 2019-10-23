@@ -9,6 +9,11 @@ require 'vendor/autoload.php'; // If you're using Composer (recommended)
 // https://github.com/sendgrid/sendgrid-php/releases
 session_start();
 include './connectToDB.php';
+if(!isset($_SESSION['departure_flight'])) {
+  $_SESSION['error'] = 'some error occured, We sorry !. Try again';
+  header('Location: ./index#search');
+  exit();
+}
 $listPassengers = $_SESSION['list_passengers'];
 $passengersNum = $_SESSION['departure_flight']['passengers'];
 $departure_flight_id = $_SESSION['departure_flight_id'];
