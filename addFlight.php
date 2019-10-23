@@ -25,7 +25,7 @@ else
       $flight_number = $_POST['carrier'].''.$flightsCount;
     }
     else{
-      $flight_number = $_POST['flight_number'];
+      $flight_number = $_POST['carrier'].$_POST['flight_number'];
     }
     $from = $_POST['from'];
     $to = $_POST['to'];

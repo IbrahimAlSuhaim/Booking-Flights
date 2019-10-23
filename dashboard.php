@@ -171,8 +171,8 @@ $result_display = mysqli_query($con,$sql_display);
           <div class="row">
             <div class="col-4 my-2">
               <label for="flight_number">Flight Number</label>
-              <input class="form-control" type="text" placeholder="XX0000" id="flight_number" name="flight_number" value="">
-              <small class="form-text text-muted">Leave blank if you want to generate random flight_number</small>
+              <input class="form-control" type="text" placeholder="0000" id="flight_number" name="flight_number" value="">
+              <small class="form-text text-muted">without carrier code, just enter the numbers for ex:1234</small>
             </div>
           </div>
           <div class="row">
@@ -194,6 +194,7 @@ $result_display = mysqli_query($con,$sql_display);
                   <option value="6S">SaudiGulf (6S)</option>
                   <option value="F3">Flyadeal (F3)</option>
                 </select>
+                <small class="form-text text-muted">first two chars of flight_number are generated based on this choice</small>
               </div>
               <div class="form-group">
                 <label for="departure_date">Departure Date</label>
@@ -218,7 +219,7 @@ $result_display = mysqli_query($con,$sql_display);
                   <option value="Jeddah (JED)">Jeddah (JED)</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group mb-5">
                 <label for="airplane">Airplane</label>
                 <select class="custom-select" id="airplane" name="airplane">
                   <option selected value="" disabled>Choose...</option>
