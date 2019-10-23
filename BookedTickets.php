@@ -7,7 +7,7 @@ $id = $_SESSION['user_id'];
 
 
 
-  $sql_BookedTickets = ' SELECT * FROM flights, booked_tickets WHERE flights.flight_id = booked_tickets.flight_id AND booked_tickets.user_id = "'.$id.'" ';
+  $sql_BookedTickets = ' SELECT * FROM flights, booked_tickets, passengers WHERE flights.flight_id = booked_tickets.flight_id AND booked_tickets.user_id = "'.$id.'" ';
   $result_BookedTickets = mysqli_query($con,$sql_BookedTickets)
 ?>
 <!--
@@ -32,7 +32,7 @@ $id = $_SESSION['user_id'];
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Book flight tickets">
   <meta name="author" content="SWE444 Project">
-  <title>Book Flights System</title>
+  <title>Booked tickets</title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -44,29 +44,29 @@ $id = $_SESSION['user_id'];
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
 
   <style>
-   
+
     a[data-hide]
     {
     display: none;
     }
 
-    @media (max-width: 576px) { 
+    @media (max-width: 576px) {
         #mainText
         {
             font-size: 2rem !important;
         }
      }
 
-    
-    @media (max-width: 768px) { 
+
+    @media (max-width: 768px) {
         #mainText
         {
             font-size: 3rem !important;
         }
      }
 
-   
-   
+
+
 
 </style>
 
@@ -92,25 +92,16 @@ $id = $_SESSION['user_id'];
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
     <div class="position-relative">
       <!-- Hero for FREE version -->
-      <section class="section section-lg section-hero section-shaped">
+      <section class="section-shaped">
         <!-- Background circles -->
         <div class="shape shape-style-1 shape-primary">
-          <span class="span-150"></span>
-          <span class="span-50"></span>
-          <span class="span-50"></span>
-          <span class="span-75"></span>
-          <span class="span-100"></span>
-          <span class="span-75"></span>
-          <span class="span-50"></span>
-          <span class="span-100"></span>
-          <span class="span-50"></span>
-          <span class="span-100"></span>
+
         </div>
         <div class="container shape-container d-flex align-items-center py-lg">
           <div class="col px-0">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-lg-6 text-center">
-                <h1 id="mainText" style="font-size: 4rem; color: #f4f4f4; font-weight: 300;">Booked Tickets</h1>
+            <div class="row">
+              <div class="col-lg-12">
+                <h1 class="font-weight-300 text-center text-white">Booked Tickets</h1>
               </div>
             </div>
           </div>
@@ -125,13 +116,23 @@ $id = $_SESSION['user_id'];
         <section class="section pb-0 section-components">
           <div class="container mb-5">
             <!-- Inputs -->
-            <h3 class="h4 text-primary font-weight-bold mb-4" id="search">Available Tickets</h3>
+            <h3 class="h4 text-primary font-weight-bold mb-4">Available Tickets</h3>
             <?php
 
 while($row=mysqli_fetch_array($result_BookedTickets)){
     echo '
     <div class="col-lg-8 col-sm-12 text-center py-2 mx-auto mb-3">
       <div class="card card-lift shadow border-0">
+        <div class="card-header pt-2 pb-0">
+          <div class="row">
+            <div class="col-6">
+              <p class="text-left">Passenger name: '.$row['first_name'].' '.$row['family_name'].'</p>
+            </div>
+            <div class="col-6">
+              <p class="text-right font-weight-bold text-muted">'.$row['flight_number'].'</p>
+            </div>
+          </div>
+        </div>
         <div class="card-body">
           <div class="row justify-content-center">
             <div class="col-4">
@@ -147,8 +148,12 @@ while($row=mysqli_fetch_array($result_BookedTickets)){
               <span class="d-block mb-1">'.$row['to'].'</span>
             </div>
           </div>
-         
-          <button class="btn btn-1 btn-warning mt-4" type="button">Details</button>
+          <hr class="py-0 mt-0 mb-0">
+          <div class="row">
+            <div class="col-12 text-right">
+              <a class="btn btn-link text-info mb-0">Details</a>
+            </div>
+          </div>
         </div>
       </div>
 

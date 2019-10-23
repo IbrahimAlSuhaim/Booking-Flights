@@ -4,15 +4,6 @@
       <a class="navbar-brand mr-lg-5" href="./index">
         <img src="./assets/img/brand/white.png" alt="brand">
       </a>
-      <!-- START -->
-      <?php
-      if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
-       
-        echo' <a href="BookedTickets.php" class="btn btn-1 btn-primary btn-sm" type="" data-hide="">Booked Tickets</a> ';
-
-      }
-      ?>
-      <!-- END -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,6 +23,20 @@
             </div>
           </div>
         </div>
+      <?php
+      if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
+        echo '
+        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+          <li class="nav-item">
+            <a href="./BookedTickets" class="nav-link" role="button" data-toggle="tooltip" title="Manage your tickets">
+              <i class="ni ni-collection d-lg-none"></i>
+              <span class="nav-link-inner--text">My Tickets</span>
+            </a>
+          </li>
+        </ul>
+        ';
+      }
+       ?>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="https://www.facebook.com/" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
@@ -50,6 +55,7 @@
               <i class="fa fa-twitter-square"></i>
               <span class="nav-link-inner--text d-lg-none">Twitter</span>
             </a>
+            <hr class="d-lg-none d-block">
           </li>
           <?php
             if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
@@ -59,16 +65,16 @@
 
               echo '
               <li class="nav-item">
-                <span class="text-primary d-lg-none d-block">Welcome '.$first_name.'</span>
+                <span class="text-primary d-lg-none d-block mb-2">Welcome '.$first_name.'</span>
                 <span class="text-white d-none d-lg-block">Welcome '.$first_name.'</span>
               </li>
               <li class="nav-item d-block ml-lg-4">
-              <a href="./logout" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon">
-              <i class="fa fa-sign-out" aria-hidden="true"></i>
-              </span>
-              <span class="nav-link-inner--text">Sign out</span>
-              </a>
+                <a href="./logout" class="btn btn-neutral btn-icon">
+                  <span class="btn-inner--icon">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  </span>
+                  <span class="nav-link-inner--text">Sign out</span>
+                </a>
               </li>';
             }
             else {
