@@ -4,6 +4,15 @@
       <a class="navbar-brand mr-lg-5" href="./index">
         <img src="./assets/img/brand/white.png" alt="brand">
       </a>
+      <!-- START -->
+      <?php
+      if(isset($_COOKIE['email'])||isset($_SESSION['email'])) {
+       
+        echo' <a href="BookedTickets.php" class="btn btn-1 btn-primary btn-sm" type="" data-hide="">Booked Tickets</a> ';
+
+      }
+      ?>
+      <!-- END -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
