@@ -292,8 +292,8 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="email_'.$i.'">Email:*</label>
-                    <input class="form-control" placeholder="email" type="email" id="email_'.$i.'" name="email_'.$i.'" required>
+                    <label for="email_'.$i.'">Email</label>
+                    <input class="form-control" placeholder="email" type="email" id="email_'.$i.'" name="email_'.$i.'">
                   </div>
                 </div>
               </div>
