@@ -7,7 +7,8 @@ $id = $_SESSION['user_id'];
 
 
 
-  $sql_BookedTickets = ' SELECT * FROM flights, booked_tickets, passengers WHERE flights.flight_id = booked_tickets.flight_id AND booked_tickets.user_id = "'.$id.'" ';
+  $sql_BookedTickets = " SELECT * FROM flights, booked_tickets, passengers
+  WHERE flights.flight_id = booked_tickets.flight_id AND booked_tickets.user_id = '$id' AND booked_tickets.passenger_id= passengers.passenger_id";
   $result_BookedTickets = mysqli_query($con,$sql_BookedTickets)
 ?>
 <!--
