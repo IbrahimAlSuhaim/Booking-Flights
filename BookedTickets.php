@@ -116,50 +116,63 @@ $id = $_SESSION['user_id'];
         <section class="section pb-0 section-components">
           <div class="container mb-5">
             <!-- Inputs -->
-            <h3 class="h4 text-primary font-weight-bold mb-4">Available Tickets</h3>
-            <?php
+    <?php
 
-while($row=mysqli_fetch_array($result_BookedTickets)){
-    echo '
-    <div class="col-lg-8 col-sm-12 text-center py-2 mx-auto mb-3">
-      <div class="card card-lift shadow border-0">
-        <div class="card-header pt-2 pb-0">
-          <div class="row">
-            <div class="col-6">
-              <p class="text-left">Passenger name: '.$row['first_name'].' '.$row['family_name'].'</p>
+      if($result_BookedTickets->num_rows !== 0){
+        echo '
+          <h3 class="h4 text-primary font-weight-bold mb-4">Available Tickets</h3>';
+        while($row=mysqli_fetch_array($result_BookedTickets)){
+          echo '
+          <div class="col-lg-8 col-sm-12 text-center py-2 mx-auto mb-3">
+            <div class="card card-lift shadow border-0">
+              <div class="card-header pt-2 pb-0">
+                <div class="row">
+                  <div class="col-6">
+                    <p class="text-left">Passenger name: '.$row['first_name'].' '.$row['family_name'].'</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-right font-weight-bold text-muted">'.$row['flight_number'].'</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-4">
+                    <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
+                    <span class="d-block mb-1">'.$row['from'].'</span>
+                  </div>
+                  <div class="col-4">
+                    <small class="d-block mb-1 text-success">Direct</small>
+                    <small class="d-block mb-1">Duration: '.getDuration($row['departure_time'], $row['arrival_time']).'</small>
+                  </div>
+                  <div class="col-4">
+                    <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
+                    <span class="d-block mb-1">'.$row['to'].'</span>
+                  </div>
+                </div>
+                <hr class="py-0 mt-0 mb-0">
+                <div class="row">
+                  <div class="col-12 text-right">
+                    <a class="btn btn-link text-info mb-0">Details</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-6">
-              <p class="text-right font-weight-bold text-muted">'.$row['flight_number'].'</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row justify-content-center">
-            <div class="col-4">
-              <span class="d-block mb-1">'.substr($row['departure_time'], 0, -3).'</span>
-              <span class="d-block mb-1">'.$row['from'].'</span>
-            </div>
-            <div class="col-4">
-              <small class="d-block mb-1 text-success">Direct</small>
-              <small class="d-block mb-1">Duration: '.getDuration($row['departure_time'], $row['arrival_time']).'</small>
-            </div>
-            <div class="col-4">
-              <span class="d-block mb-1">'.substr($row['arrival_time'], 0, -3).'</span>
-              <span class="d-block mb-1">'.$row['to'].'</span>
-            </div>
-          </div>
-          <hr class="py-0 mt-0 mb-0">
-          <div class="row">
-            <div class="col-12 text-right">
-              <a class="btn btn-link text-info mb-0">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  ';
-  }
+          </div>
+        ';
+        }
+      }
+      else{
+        echo '
+        <div class="row">
+          <div class="col mb-5">
+            <p class="h4 mb-4">Unfortunately there is no tickets booked by your account, <a class="small" href="./index#search">book a trip</a></p>
+          </div>
+        </div>';
+      }
+
+
 
 
 
