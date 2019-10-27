@@ -13,8 +13,19 @@
   $passengers = $_POST['passengers'];
   $class = $_POST['class'];
   $next = 'd_passenger';
+
+  include 'connectToDB.php';
+
   if ($directionality == 'return') {
     $return_date = $_POST['return_date'];
+
+    $sql="SELECT * FROM flights WHERE departure_date LIKE '$return_date' AND `to`='$origin' AND `from`='$destination' AND reserved+'$passengers' <= capacity";
+    $result=$con->query($sql);
+    if($result->num_rows==0) {
+      $_SESSION['error'] = "Sorry we couldn't find any return flights in the specified date";
+      header("Location: index#search");
+      exit();
+    }
     $next = 'f_return';
   }
   // to be used in returnflights
@@ -22,11 +33,11 @@
     "directionality"=>$directionality, "departure_date"=>$departure_date,
     "return_date"=>$return_date, "passengers"=>$passengers, "class"=>$class);
 
-  include 'connectToDB.php';
+
   $sql="SELECT * FROM flights WHERE departure_date LIKE '$departure_date' AND `from`='$origin' AND `to`='$destination' AND reserved+'$passengers' <= capacity";
   $result=$con->query($sql);
   if($result->num_rows==0) {
-      $_SESSION['error'] = "Sorry we couldn't find any flight";
+      $_SESSION['error'] = "Sorry we couldn't find any departure flight";
       header("Location: index#search");
       exit();
   }
