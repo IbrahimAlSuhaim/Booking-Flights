@@ -8,6 +8,10 @@ unset($_SESSION['departure_flight']);
 unset($_SESSION['departure_flight_id']);
 unset($_SESSION['return_flight_id']);
 unset($_SESSION['list_passengers']);
+unset($_SESSION['selectedSeats_departure']);
+unset($_SESSION['departure_meals']);
+unset($_SESSION['selectedSeats_return']);
+unset($_SESSION['return_meals']);
  ?>
 <!--
 

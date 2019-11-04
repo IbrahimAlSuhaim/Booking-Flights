@@ -6,23 +6,8 @@
     header('Location: ./index#search');
     exit();
   }
+
   $passengers = $_SESSION['departure_flight']['passengers'];
-  $listPassengers = [];
-  for ($i=1; $i <= $passengers ; $i++) {
-    $birth_date = $_POST["birth_year_$i"] . '-' . $_POST["birth_month_$i"] . '-' . $_POST["birth_day_$i"];
-    $number = $_POST["country_code_$i"] . $_POST["number_$i"];
-
-    $passenger = array("first_name_$i"=>$_POST["first_name_$i"],"middle_name_$i"=>$_POST["middle_name_$i"], "family_name_$i"=>$_POST["family_name_$i"],
-    "nationality_$i"=>$_POST["nationality_$i"], "document_type_$i"=>$_POST["document_type_$i"], "document_number_$i"=>$_POST["document_number_$i"],
-    "birth_date_$i"=>$birth_date, "gender_$i"=>$_POST["gender_$i"], "number_$i"=>$number, "email_$i"=>$_POST["email_$i"]) ;
-    $listPassengers+=  $passenger;
-  }
-  //to be used later
-  // So until here we have in $_SESSION : 'departure_flight', 'departure_flight_id', and maybe 'return_flight_id'
-  $_SESSION['list_passengers'] = $listPassengers;
-
-  $next = 'payment';
-
 
   include './assets/helper.php';
 ?>
@@ -133,13 +118,13 @@
     <hr>
     <section class="section">
       <div class="container mb-5">
-        <h3 class="mb-4">Select seats and preferred meal for your departure flight</h3>
+        <h3 class="mb-4">Now select seats and preferred meal for your return flight</h3>
         <div class="row justify-content-center">
           <div class="col-7 mr-5">
             <div id="map-container">
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div id="cart-container"></div>
             <div id="legend-container"></div>
             <form>
@@ -147,27 +132,27 @@
               <div class="form-group">
                 <p class="h5" for="">Special meal</p>
                 <small class="text-muted" for="">You can order a special meal on any flight where a meal service is normally provided.</small>
-            <?php
-              for ($i=1; $i <= $passengers ; $i++) {
-                echo '
-                <div class="form-group mt-3">
-                  <label>Special meal for '.$_SESSION['list_passengers']["first_name_$i"].'</label>
-                  <select class="form-control form-control-sm" id="meal_'.$i.'" name="meal" required>
-                    <option selected value="" disabled>None</option>
-                    <option>Seafood</option>
-                    <option>Baby meal, for infants</option>
-                    <option>Bland meal, especially formulated for ulcer-patients</option>
-                    <option>Diabetic meal, especially formulated for diabetic passengers</option>
-                    <option>Low fat meal, especially for passengers on a low-fat diet</option>
-                    <option>Salt-free meal, especially for passengers on a low-sodium diet</option>
-                    <option>Vegetarian meal, European style food</option>
-                    <option>Asian vegetarian meal</option>
-                    <option>Fasting meal</option>
-                  </select>
-                </div>
-                ';
-              }
-             ?>
+              <?php
+                for ($i=1; $i <= $passengers ; $i++) {
+                  echo '
+                  <div class="form-group mt-3">
+                    <label>Special meal for '.$_SESSION['list_passengers']["first_name_$i"].'</label>
+                    <select class="form-control form-control-sm" id="meal_'.$i.'" name="meal" required>
+                      <option selected value="" disabled>None</option>
+                      <option>Seafood</option>
+                      <option>Baby meal, for infants</option>
+                      <option>Bland meal, especially formulated for ulcer-patients</option>
+                      <option>Diabetic meal, especially formulated for diabetic passengers</option>
+                      <option>Low fat meal, especially for passengers on a low-fat diet</option>
+                      <option>Salt-free meal, especially for passengers on a low-sodium diet</option>
+                      <option>Vegetarian meal, European style food</option>
+                      <option>Asian vegetarian meal</option>
+                      <option>Fasting meal</option>
+                    </select>
+                  </div>
+                  ';
+                }
+               ?>
               </div>
             </form>
             <hr>
@@ -183,7 +168,7 @@
               else{
                   echo '<div id="directionality" hidden>oneWay</div>';
               }
-              $flightId = $_SESSION['departure_flight_id'];
+              $flightId = $_SESSION['return_flight_id'];
               $sql = "SELECT airplane FROM flights WHERE flight_id = $flightId";
               $result = $con->query($sql);
               $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -191,7 +176,7 @@
 
               echo '<div id="className" hidden>'.$_SESSION['departure_flight']['class'].'</div>';
 
-              echo '<div id="flightId" hidden>'.$_SESSION['departure_flight_id'].'</div>';
+              echo '<div id="flightId" hidden>'.$_SESSION['return_flight_id'].'</div>';
 
               echo '<div id="passengersNum" hidden>'.$_SESSION['departure_flight']['passengers'].'</div>';
              ?>
@@ -234,12 +219,7 @@
     var className = document.getElementById('className').innerHTML
     var airplane = document.getElementById('airplane').innerHTML
     var passengersNum = parseInt(document.getElementById('passengersNum').innerHTML)
-    if (directionality === 'return'){
-      var next ='./seatReturn'
-    }
-    else{
-      var next = './payment'
-    }
+    var next = './payment'
     var rowNum;
     if(airplane === 'Boeing 777-300ER'){
       rowNum = 46
@@ -353,7 +333,7 @@
           var meal = document.getElementById('meal_'+i).value
           arrMeals.push(meals['meal_'+i] = meal)
         }
-        fetch("./departureSeats_to_session.php", {
+        fetch("./returnSeats_to_session.php", {
           method: "POST",
           mode: "same-origin",
           credentials: "same-origin",

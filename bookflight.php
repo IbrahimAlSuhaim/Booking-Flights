@@ -14,6 +14,9 @@ if(!isset($_SESSION['departure_flight'])) {
   header('Location: ./index#search');
   exit();
 }
+//MEAL if selected
+
+
 $listPassengers = $_SESSION['list_passengers'];
 $passengersNum = $_SESSION['departure_flight']['passengers'];
 $departure_flight_id = $_SESSION['departure_flight_id'];
@@ -59,17 +62,21 @@ for ($i=1; $i <= $passengersNum ; $i++) {
   $sql = "SELECT `ticket_id` FROM `booked_tickets` WHERE `user_id`='$user_id' AND `passenger_id`= '$passenger_id' AND `flight_id`= '$departure_flight_id'";
   $result = $con->query($sql);
   if ($result->num_rows === 0) { // check if the user has already booked a ticket with same info to prevent redundancy for ex: user update the confirmation page
+    $seat = $_SESSION["selectedSeats_departure"][$i-1];
+    $meal=$_SESSION['departure_meals'][$i-1];
     $sql = "INSERT INTO `booked_tickets`(`user_id`, `flight_id`, `passenger_id`, `class`, `seat`, `meal`)
-    VALUES ('$user_id', '$departure_flight_id', '$passenger_id', '$class', '', '')";
+    VALUES ('$user_id', '$departure_flight_id', '$passenger_id', '$class', '$seat', '$meal')";
     if($con->query($sql)!==TRUE) {
       echo 'fail'.$con->error;
     }
     incReserved($con, $departure_flight_id);
-
+    echo $sql;
     if(isset($_SESSION['return_flight_id'])){ // add the return flight if the user chose return option
       $return_flight_id = $_SESSION['return_flight_id'];
+      $seat = $_SESSION["selectedSeats_return"][$i-1];
+      $meal=$_SESSION['return_meals'][$i-1];
       $sql = "INSERT INTO `booked_tickets`(`user_id`, `flight_id`, `passenger_id`, `class`, `seat`, `meal`)
-      VALUES ('$user_id', '$return_flight_id', '$passenger_id', '$class', '', '')";
+      VALUES ('$user_id', '$return_flight_id', '$passenger_id', '$class', '$seat', '$meal' )";
       $con->query($sql);
       incReserved($con, $return_flight_id);
     }
