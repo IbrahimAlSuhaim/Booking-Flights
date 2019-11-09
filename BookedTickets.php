@@ -45,10 +45,11 @@ $id = $_SESSION['user_id'];
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
 
   <style>
-
+  
     a[data-hide]
     {
     display: none;
+    
     }
 
     @media (max-width: 576px) {
@@ -64,6 +65,7 @@ $id = $_SESSION['user_id'];
         {
             font-size: 3rem !important;
         }
+      
      }
 
 
@@ -113,9 +115,37 @@ $id = $_SESSION['user_id'];
             <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
           </svg>
         </div>
+        
       </section>
+
+
+
+      
+
+
         <section class="section pb-0 section-components">
           <div class="container mb-5">
+
+          <?php
+
+if(isset($_SESSION['delete'])){
+  echo '
+    <div class="col-12 mb-3">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+        <span class="alert-inner--text">'.$_SESSION['delete'].'</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+    ';
+
+    unset($_SESSION['delete']);
+}
+
+?>
+
             <!-- Inputs -->
     <?php
 
@@ -155,8 +185,11 @@ $id = $_SESSION['user_id'];
                 </div>
                 <hr class="py-0 mt-0 mb-0">
                 <div class="row">
-                  <div class="col-12 text-right">
-                    <a class="btn btn-link text-info mb-0">Details</a>
+                  <div class="col-6 text-left">
+                    <a onclick="confirmDelete('.$row['passenger_id'].')" data-toggle="modal" data-target="#modal" style="cursor: pointer;" class="btn btn-link text-danger mb-0">Delete</a>
+                  </div>
+                  <div class="col-6 text-right">
+                    <a href="detailTicket.php"  class="btn btn-link text-info mb-0">Details</a>
                   </div>
                 </div>
               </div>
@@ -176,14 +209,33 @@ $id = $_SESSION['user_id'];
       }
 
 
-
-
-
-
-
-
             ?>
           </div>
+
+
+
+   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+            Are you sure you want to delete a ticket ?
+            </div>
+            <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+          <a href="" id="btnDel" type="button" class="btn btn-primary ml-3">delete</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
       </section>
     </div>
   </main>
@@ -212,6 +264,17 @@ $id = $_SESSION['user_id'];
   <script src="./assets/js/argon.js?v=1.1.0"></script>
   <!-- Custom JS -->
   <script src="./assets/js/custom.js"></script>
+
+  <script>
+
+      function confirmDelete(passId)
+      {
+        btn = document.querySelector('#btnDel');
+        btn.href = "deleteTicket.php?passId="+passId;
+      }
+
+  </script>
+
 </body>
 
 </html>
