@@ -189,7 +189,7 @@ if(isset($_SESSION['delete'])){
                     <a onclick="confirmDelete('.$row['passenger_id'].')" data-toggle="modal" data-target="#modal" style="cursor: pointer;" class="btn btn-link text-danger mb-0">Delete</a>
                   </div>
                   <div class="col-6 text-right">
-                    <a href="detailTicket.php"  class="btn btn-link text-info mb-0">Details</a>
+                    <a href="detailTicket.php?ticketId='.$row['ticket_id'].'"  class="btn btn-link text-info mb-0">Details</a>
                   </div>
                 </div>
               </div>
