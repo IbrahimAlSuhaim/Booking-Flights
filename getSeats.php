@@ -1,4 +1,5 @@
 <?php
+// get all seats reserved at specific flight
   include_once('./connectToDB.php');
   if(isset($_POST['flightId']) && !empty($_POST['flightId'])) {
     $flightId = $_POST['flightId'];
