@@ -45,11 +45,11 @@ $id = $_SESSION['user_id'];
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
 
   <style>
-  
+
     a[data-hide]
     {
     display: none;
-    
+
     }
 
     @media (max-width: 576px) {
@@ -65,7 +65,7 @@ $id = $_SESSION['user_id'];
         {
             font-size: 3rem !important;
         }
-      
+
      }
 
 
@@ -115,12 +115,12 @@ $id = $_SESSION['user_id'];
             <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
           </svg>
         </div>
-        
+
       </section>
 
 
 
-      
+
 
 
         <section class="section pb-0 section-components">
@@ -186,7 +186,7 @@ if(isset($_SESSION['delete'])){
                 <hr class="py-0 mt-0 mb-0">
                 <div class="row">
                   <div class="col-6 text-left">
-                    <a onclick="confirmDelete('.$row['passenger_id'].')" data-toggle="modal" data-target="#modal" style="cursor: pointer;" class="btn btn-link text-danger mb-0">Delete</a>
+                    <a onclick="confirmDelete('.$row['ticket_id'].')" data-toggle="modal" data-target="#modal" style="cursor: pointer;" class="btn btn-link text-danger mb-0">Delete</a>
                   </div>
                   <div class="col-6 text-right">
                     <a href="detailTicket.php?ticketId='.$row['ticket_id'].'"  class="btn btn-link text-info mb-0">Details</a>
@@ -267,10 +267,10 @@ if(isset($_SESSION['delete'])){
 
   <script>
 
-      function confirmDelete(passId)
+      function confirmDelete(ticketId)
       {
         btn = document.querySelector('#btnDel');
-        btn.href = "deleteTicket.php?passId="+passId;
+        btn.href = "deleteTicket.php?ticketId="+ticketId;
       }
 
   </script>
