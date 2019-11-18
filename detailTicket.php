@@ -11,6 +11,9 @@ $ticket_id = $_GET['ticketId'];
   $sql_BookedTicket = " SELECT * FROM flights, booked_tickets, passengers
   WHERE flights.flight_id = booked_tickets.flight_id AND booked_tickets.ticket_id = '$ticket_id' AND booked_tickets.passenger_id= passengers.passenger_id";
   $result_BookedTicket = mysqli_query($con,$sql_BookedTicket)
+
+
+
 ?>
 <!--
 
@@ -46,11 +49,11 @@ $ticket_id = $_GET['ticketId'];
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
 
   <style>
-  
+
     a[data-hide]
     {
     display: none;
-    
+
     }
 
     @media (max-width: 576px) {
@@ -66,7 +69,7 @@ $ticket_id = $_GET['ticketId'];
         {
             font-size: 3rem !important;
         }
-      
+
      }
 
 
@@ -116,12 +119,12 @@ $ticket_id = $_GET['ticketId'];
             <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
           </svg>
         </div>
-        
+
       </section>
 
 
 
-      
+
 
 
         <section class="section pb-0 section-components">
@@ -161,7 +164,7 @@ $ticket_id = $_GET['ticketId'];
                </div>
              <div class="d-flex justify-content-between py-2">
                 <span>Airplane</span>
-                <span>'.$row['airplane'].'</span>
+                <span id="airplane">'.$row['airplane'].'</span>
             </div>
             <div class="d-flex justify-content-between py-2">
                 <span>Departure date</span>
@@ -178,6 +181,18 @@ $ticket_id = $_GET['ticketId'];
         <div class="d-flex justify-content-between py-2">
             <span>Arrival time</span>
             <span>'.substr($row['arrival_time'], 0, -3).'</span>
+        </div>
+        <div class="d-flex justify-content-between py-2">
+           <span>Class</span>
+           <span>'.$row['class'].'</span>
+       </div>
+        <div class="d-flex justify-content-between py-2">
+            <span>Seat</span>
+            <span id="seat">'.$row['seat'].'</span>
+        </div>
+        <div class="d-flex justify-content-between py-2">
+            <span>Special meal</span>
+            <span>'.$row['meal'].'</span>
         </div>
 
               </div>
@@ -205,6 +220,11 @@ $ticket_id = $_GET['ticketId'];
             ?>
           </div>
 
+          <div hidden>
+            <div id="map-container"></div>
+            <div id="cart-container"></div>
+            <div id="legend-container"></div>
+          </div>
 
       </section>
     </div>
@@ -232,16 +252,72 @@ $ticket_id = $_GET['ticketId'];
   <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.1.0"></script>
-  <!-- Custom JS -->
-  <script src="./assets/js/custom.js"></script>
+  <!-- jquery-confirm -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="./assets/js/flights.js"></script>
+  <script type="text/javascript" src="./assets/seatmap/src/js/seatchart.js"></script>
 
   <script>
-
+    var passengersNum = 1;
       function confirmDelete(passId)
       {
         btn = document.querySelector('#btnDel');
         btn.href = "deleteTicket.php?passId="+passId;
       }
+   $( document ).ready(function() {
+      var airplane = document.getElementById('airplane').innerHTML;
+      var rowNum;
+      if(airplane === 'Boeing 777-300ER'){
+        rowNum = 46
+      }
+      else {
+        rowNum = 38
+      }
+
+      var options = {
+          // Reserved and disabled seats are indexed
+          // from left to right by starting from 0.
+          // Given the seatmap as a 2D array and an index [R, C]
+          // the following values can obtained as follow:
+          // I = columns * R + C
+          map: {
+              id: 'map-container',
+              rows: rowNum,
+              columns: 12,
+              // e.g. Reserved Seat [Row: 1, Col: 2] = 7 * 1 + 2 = 9
+              reserved: {
+                  seats: []
+              },
+              disabled: {
+                  seats: [1, 2, 4, 7, 9, 10, 13, 14, 16, 19, 21, 22, 38, 40, 43, 45, 50, 52, 55,
+                    57, 62, 64, 67, 69, 74, 76, 79, 81, 86, 88, 91, 93, 98, 100, 103, 105],
+                  rows: [2, 9, 13, 25, 37],
+                  columns: [3, 8]
+              }
+          },
+          types: [
+              { type: "selected", backgroundColor: "#287233", price: 0, selected: [] }
+          ],
+          cart: {
+              id: 'cart-container',
+              width: 280,
+              height: 250,
+              currency: 'SR',
+          },
+          legend: {
+              id: 'legend-container',
+          },
+          assets: {
+              path: "./assets/seatmap/src/assets",
+          }
+      };
+        sc = new Seatchart(options);
+        var seatIndex = document.getElementById('seat');
+        var seatName = sc.get(seatIndex.innerHTML);
+        seatIndex.innerHTML = seatName.name;
+    });
+
+
 
   </script>
 
