@@ -1,7 +1,8 @@
 <?php
 include './connectToDB.php';
 date_default_timezone_set('Asia/Kuwait');
-$sql = "SELECT * FROM `flights` where '".date("Y-m-d")."'>=date(`departure_date`) AND '".date("h:i:s")."' >= `departure_time`";
+$sql = "SELECT * FROM `flights` where '".date("Y-m-d")."' = date(`departure_date`) AND '".date("H:i:s")."' >= `departure_time`";
+echo $sql;
 $result = $con->query($sql);
 if($result->num_rows > 0) {
   while($row=mysqli_fetch_array($result)){
