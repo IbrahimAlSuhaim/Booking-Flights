@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 include './connectToDB.php';
 $sql = "SELECT users.email AS user_email, users.first_name AS user_first_name, passengers.first_name, passengers.family_name, flights.departure_date, flights.departure_time, booked_tickets.ticket_id FROM users, flights, booked_tickets, passengers
 WHERE users.user_id = booked_tickets.user_id AND flights.flight_id = booked_tickets.flight_id AND passengers.passenger_id = booked_tickets.passenger_id
-AND flights.departure_date <= ".date('Y-m-d',strtotime("+1 days"))." AND booked_tickets.emailSent = 0 ";
+AND flights.departure_date <= '".date('Y-m-d',strtotime("+1 days"))."' AND booked_tickets.emailSent = 0 ";
 $result=$con->query($sql);
 if($result->num_rows>0) {
   while($row=mysqli_fetch_array($result)) {
