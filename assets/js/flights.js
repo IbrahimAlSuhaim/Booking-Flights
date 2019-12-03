@@ -9,7 +9,7 @@ function handleChooseFlight(next, flightId) {
         btnClass: 'btn-blue',
         action: function () {
           if (next === 'f_return') {
-            document.location.href = './returnflights?departure_id='+flightId+'#return';
+            document.location.href = './returnFlights?departure_id='+flightId+'#return';
           }
           else if (next === 'd_passenger') {
             document.location.href = './passenger?departure_id='+flightId;
