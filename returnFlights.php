@@ -165,8 +165,30 @@
           <div class="row justify-content-center row-grid mt-3">
             <div class="col-12">
               <h3 id="return">Now select your return flight</h3>
-            </div>';
+              </div>';?>
+      <!-- //TODO: -->
 
+              <div class="container my-5 d-flex justify-content-around align-items-center">
+                <div class="mixLeft">
+                    <p class="mb-1">fliter by airline</p>
+                    <button type="button" data-filter="all" class="btn btn-sm btn-1 btn-primary">All</button>
+                    <button type="button" data-filter=".SV" class="btn btn-sm btn-1 btn-primary">Saudi Airline</button>
+                    <button type="button" data-filter=".XY" class="btn btn-sm btn-1 btn-primary">Flynas</button>
+                </div>
+
+                <div class="mixRight">
+                    <p class="mb-1">sort by price</p>
+                    <button type="button" data-sort="order:asc" class="btn btn-sm btn-1 btn-primary">Ascending</button>
+                    <button type="button" data-sort="order:descending" class="btn btn-sm btn-1 btn-primary">Descending</button>
+                </div>
+              </div>
+
+
+      <!-- //TODO: -->
+
+              <div id="container">
+
+        <?php
           $sql="SELECT * FROM flights WHERE departure_date LIKE '$return_date' AND `to`='$origin' AND `from`='$destination' AND reserved+'$passengers' <= capacity";
           $result=$con->query($sql);
           if($result->num_rows==0) {
@@ -176,7 +198,7 @@
 
           while($row=mysqli_fetch_array($result)) {
             echo '
-            <div class="col-lg-8 col-sm-12 text-center py-2">
+            <div class="col-lg-12 col-sm-12 text-center py-3 mix '.$row['carrier'].'" data-order="'.($row['price_factor']*getPrice($class)).'">
               <div class="card card-lift shadow border-0">
                 <div class="card-body py-3">
                   <div class="row justify-content-center">
@@ -214,11 +236,13 @@
             </div>';
 
             }
+            ?>
+                  </div>
+            <?php
           echo '</div>';
 
             echo '
             </div>';
-
         echo '
         </div>';
      ?>
@@ -249,6 +273,13 @@
   <!-- jquery-confirm -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script src="./assets/js/flights.js"></script>
+  <!-- else -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>
+  <script>
+
+  var mixer = mixitup('#container');
+
+  </script>
 </body>
 
 </html>
