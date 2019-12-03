@@ -13,13 +13,13 @@ if($result->num_rows>0) {
 
     $email = new \SendGrid\Mail\Mail();
     $email->setFrom("No-reply@bookflights.com", "Bookflights Team");
-    $email->setSubject("Reminder");
+    $email->setSubject("Flight Reminder");
     $email->addTo($emailTo, $user_first_name);
-    $email->addContent("text/plain", "Hi, ".$user_first_name." This is a flight reminder");
     $email->addContent(
         "text/html", "<p>Hello ". $user_first_name. " 👋</p>
         <br>
-        <strong>You have a flight in ".$row['departure_date']." at ".$row['departure_time']." with passenger name: ".$row['first_name']." ".$row['family_name']."</strong>
+        <p>This is a reminder ⏰</p>
+        <strong>You have a flight in ".$row['departure_date']." at ".substr($row['departure_time'], 0, -3)." with passenger name: ".$row['first_name']." ".$row['family_name']."</strong>
         <br>
         <br>
         <p>✈️ for more info visit </p><a href='http://book-flights.herokuapp.com/'> http://book-flights.herokuapp.com/</a>"
