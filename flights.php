@@ -193,12 +193,14 @@
 
             <div class="container my-5 d-flex justify-content-around align-items-center">
             <div class="mixLeft">
+                <p class="mb-1">fliter by airline</p>
                 <button type="button" data-filter="all" class="btn btn-sm btn-1 btn-primary">All</button>
                 <button type="button" data-filter=".SV" class="btn btn-sm btn-1 btn-primary">Saudi Airline</button>
                 <button type="button" data-filter=".XY" class="btn btn-sm btn-1 btn-primary">Flynas</button>
             </div>
 
             <div class="mixRight">
+                <p class="mb-1">sort by price</p>
                 <button type="button" data-sort="order:asc" class="btn btn-sm btn-1 btn-primary">Ascending</button>
                 <button type="button" data-sort="order:descending" class="btn btn-sm btn-1 btn-primary">Descending</button>
             </div>
@@ -291,7 +293,7 @@
   <!-- else -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js"></script>
   <script>
-  
+
   var mixer = mixitup('#container');
 
   </script>
